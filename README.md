@@ -1,11 +1,17 @@
-### Class: CIS 350 03
-### Laker Vent: An anoymous venting application
+### Class: CIS 350
+### Section: 03
+### Laker Vent: An Anoymous Venting Application.
 ### Made by:
 ___
 #### Charlie Greco
-####
-####
+#### Francis Corona
+#### Ian Stewart
+___
+## 1 Abstract
 
-## Abstract
+## 2 Introduction
 
-## Introduction
+## 3 Architectural Design
+
+
+
