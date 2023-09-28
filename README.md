@@ -17,4 +17,4 @@ With the rise in popularity of social media applications in the past decade, peo
 <img width="1072" alt="Screenshot 2023-09-28 at 12 46 49 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/04a72b9e-8be9-49bf-bb75-89bb7de8d1b1">
 
 ## 4 User Guide Implementation
-![LakerVent UI bezels](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/8b3a76e5-b547-4e88-b8f1-acbb8bfadf92)
+![LakerVent UI](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/186235cb-5396-4291-8f9b-3c61cfc8d8d1)
