@@ -7,7 +7,7 @@ ___
 #### Francis Corona
 #### Ian Stewart
 ___
-## 1 AbstractU
+## 1 Abstract
 Grand Vally State University students do not have a place to express their thoughts anonymously with their peers. LakerVent is a mobile application that empowers GVSU students to communicate without revealing their identity. Share your thoughts openly, categorize posts, and explore topics like academics, relationships, mental health, and more. Connect with peers through likes, comments, and supportive messages.
 
 ## 2 Introduction
@@ -16,8 +16,9 @@ With the rise in popularity of social media applications in the past decade, peo
 ## 3 Architectural Design
 ![LakerVent Architecture Diagram](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/071e8db4-3465-49ad-8234-505646bb3874)
 
-## 4 UML Diagram
+## 3.1 Use Case Diagram
 ![LakerVent UML](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/73b81003-8046-40e4-a9ba-c31b21e9f788)
-
+## 3.2 Class Diagram
+![LakerVent](https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/6a6f4db7-0dea-4b49-8e49-e62a6e471598)
 ## 5 User Guide Implementation
 ![LakerVent UI](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/186235cb-5396-4291-8f9b-3c61cfc8d8d1)
