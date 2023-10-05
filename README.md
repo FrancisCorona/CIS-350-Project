@@ -22,3 +22,4 @@ With the rise in popularity of social media applications in the past decade, peo
 ![LakerVent](https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/6a6f4db7-0dea-4b49-8e49-e62a6e471598)
 ## 4 User Guide Implementation
 ![LakerVent UI](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/5fe5d3f0-4a28-42fd-8b88-b7f566f771ce)
+<p align="center">(a) Add comment window &nbsp;&nbsp; (b) Home page / Post feed &nbsp;&nbsp; (c) New post window</p>
