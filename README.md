@@ -1,6 +1,6 @@
 ### Class: CIS 350
 ### Section: 03
-### Laker Vent: An Anonymous Venting Application.
+### LakerVent: An Anonymous Venting Application.
 ### Made by:
 ___
 #### Charlie Greco
