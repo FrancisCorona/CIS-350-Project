@@ -20,5 +20,5 @@ With the rise in popularity of social media applications in the past decade, peo
 ![LakerVent UML](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/73b81003-8046-40e4-a9ba-c31b21e9f788)
 ## 3.2 Class Diagram
 ![LakerVent](https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/6a6f4db7-0dea-4b49-8e49-e62a6e471598)
-## 5 User Guide Implementation
-![LakerVent UI](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/186235cb-5396-4291-8f9b-3c61cfc8d8d1)
+## 4 User Guide Implementation
+![LakerVent UI](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/5fe5d3f0-4a28-42fd-8b88-b7f566f771ce)
