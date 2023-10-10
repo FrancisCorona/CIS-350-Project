@@ -20,6 +20,8 @@ With the rise in popularity of social media applications in the past decade, peo
 ![LakerVent UML](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/73b81003-8046-40e4-a9ba-c31b21e9f788)
 ## 3.2 Class Diagram
 ![LakerVent](https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/6a6f4db7-0dea-4b49-8e49-e62a6e471598)
+## 3.3 Sequence Diagram
+![LakerVent Sequence Diagram](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/fa8fcbfb-66e5-43c4-ae6d-adca81fe9537)
 ## 4 User Guide/Implementation
 ![LakerVent UI](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/5fe5d3f0-4a28-42fd-8b88-b7f566f771ce)
 <p align="center">(a) Add comment window &nbsp;&nbsp; (b) Home page / Post feed &nbsp;&nbsp; (c) New post window</p>
