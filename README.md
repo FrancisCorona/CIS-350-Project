@@ -19,7 +19,7 @@ With the rise in popularity of social media applications in the past decade, peo
 ## 3.1 Use Case Diagram
 ![LakerVent UML](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/73b81003-8046-40e4-a9ba-c31b21e9f788)
 ## 3.2 Class Diagram
-![LakerVent](https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/6a6f4db7-0dea-4b49-8e49-e62a6e471598)
+![LakerVent Class Diagram](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/b748fb77-79d5-493b-a4fd-694573b73e5d)
 ## 3.3 Sequence Diagram
 ![LakerVent Sequence Diagram](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/fa8fcbfb-66e5-43c4-ae6d-adca81fe9537)
 ## 4 User Guide/Implementation
