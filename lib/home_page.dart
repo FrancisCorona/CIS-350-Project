@@ -15,17 +15,17 @@ class HomePage extends State<Home> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: 15.0),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
-                    borderSide: BorderSide(width: 0.8),
+                    borderSide: const BorderSide(width: 0.8),
                   ),
                   hintText: "Search Posts",
                   //create the search icon on the left
-                  prefixIcon: Icon(Icons.search, size: 30.0),
+                  prefixIcon: const Icon(Icons.search, size: 30.0),
                   //creates the X icon on the right
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.clear),
+                    icon: const Icon(Icons.clear),
                     onPressed: () {
                       _searchController.clear();
                     },
