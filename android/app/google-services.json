@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "914614825639",
+    "project_id": "lakervent",
+    "storage_bucket": "lakervent.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914614825639:android:0123bc06a028668b132182",
+        "android_client_info": {
+          "package_name": "com.example.lakervent"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuFFeDa9ajMYfgdqPh4GzB39HzqTFHA2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
