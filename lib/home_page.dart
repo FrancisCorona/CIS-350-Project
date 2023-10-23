@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lakervent/main.dart';
+import 'post.dart';
 
 class HomePage extends State<Home> {
   final _searchController = TextEditingController();
@@ -28,12 +29,37 @@ class HomePage extends State<Home> {
                     icon: const Icon(Icons.clear),
                     onPressed: () {
                       _searchController.clear();
-                    },
-                  )),
+                  },
+                )
+              ),
+            ),
+          ),
+           // Wrapping the ElevatedButton with Align and Expanded.
+          Expanded(
+            child: Align(
+              // Align the button to the bottom center of the screen.
+              alignment: Alignment(0.0, 0.90),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle the post button click.
+                  Navigator.push(
+                    context,
+                    // Navigate to the PostPage when the button is clicked.
+                    MaterialPageRoute(builder: (context) => PostPage()),
+                  );
+                },
+                // Specifying size of button and text within the button.
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(220, 50),
+                  textStyle: TextStyle(fontSize: 30.0)
+                ),
+                // Display "New Post" as the button's text.
+                child: Text("New Post"),
+              ),
             ),
           ),
         ],
       ),
     );
   }
-}
+} 
