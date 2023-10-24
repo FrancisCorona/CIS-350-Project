@@ -13,4 +13,16 @@ class DataBase {
         .snapshots();
     return orderedPosts;
   }
+
+  //create post
+  Future<DocumentReference<Map<String, dynamic>>> createPost(String message) {
+    final data = {
+      "likes": 0,
+      "message": message,
+      "reportCount": 0,
+      "timeStamp": Timestamp.now()
+    };
+    final post = FirebaseFirestore.instance.collection('posts').add(data);
+    return post;
+  }
 }
