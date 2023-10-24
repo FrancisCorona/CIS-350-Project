@@ -7,7 +7,7 @@ class HomePage extends State<Home> {
   final _searchController = TextEditingController();
   String postContents = "null";
   final List<SocialMediaPost> posts = [ //placeholder for creating posts to test formatting
-    SocialMediaPost('Ugh, parking at GVSU is a never-ending nightmare! Spent 30 minutes circling for a spot today. #ParkingProblems', DateTime.now()),
+    SocialMediaPost('Ugh, parking at GVSU is a never-ending nightmare! Spent 30 minutes circling for a spot today. #ParkingProblems', DateTime.now().subtract(Duration(minutes: 5))),
     SocialMediaPost('Midterms are here, and I\'m drowning in assignments! Need some motivation and study buddies. #StressedStudent', DateTime.now().subtract(Duration(minutes: 43))),
     SocialMediaPost('Why does the Wi-Fi always decide to quit on me during online exams? Seriously, GVSU, we need better internet! #TechIssues', DateTime.now().subtract(Duration(minutes: 164))),
     SocialMediaPost('Does anyone else find Mackinac confusing as heck? Got lost AGAIN today. #LostAgain', DateTime.now().subtract(Duration(minutes: 893))),
@@ -17,7 +17,20 @@ class HomePage extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: const Text("LakerVent")),
+      backgroundColor: const Color(0xFF8BD5FF),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF00B9FF),
+        centerTitle: true,
+        elevation: 0,
+        title: const Text("LakerVent",
+          style: TextStyle(
+            color: Color(0xFF0032A0),
+            fontSize: 35,
+            fontWeight: FontWeight.w700,
+            height: 0.8,
+          )
+        ),
+      ),
       body: Column(
         children: [
           Padding(
@@ -26,19 +39,24 @@ class HomePage extends State<Home> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                    borderSide: const BorderSide(width: 0.8),
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.5),
+                contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                  borderSide: const BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
                   ),
-                  hintText: "Search Posts",
-                  //create the search icon on the left
-                  prefixIcon: const Icon(Icons.search, size: 30.0),
-                  //creates the X icon on the right
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.clear),
-                    onPressed: () {
-                      _searchController.clear();
+                ),
+                hintText: "Search Posts",
+                //create the search icon on the left
+                prefixIcon: const Icon(Icons.search, size: 30.0),
+                //creates the X icon on the right
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: () {
+                    _searchController.clear();
                   },
                 )
               ),
@@ -52,10 +70,17 @@ class HomePage extends State<Home> {
               itemBuilder: (context, index) {
                 return Container(
                   padding: EdgeInsets.all(8.0),
-                  margin: EdgeInsets.all(8.0),
+                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                   decoration: BoxDecoration(
-                    border: Border.all(width: 1.0, color: Colors.grey),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x3F000000),
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
+                      )
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,42 +107,42 @@ class HomePage extends State<Home> {
               },
             )
           ),
-           // Wrapping the ElevatedButton with Align and Expanded.
-          Align(
-            // Align the button to the bottom center of the screen.
-            alignment: Alignment.center,
-            child: Container(
-              margin: EdgeInsets.only(bottom: 30.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Handle the post button click.
-                  Navigator.push(
-                    context,
-                    // Navigate to the PostPage when the button is clicked.
-                    MaterialPageRoute(
-                        builder: (context) => PostPage()
-                    ),
-                  ).then((value) {
-                    if (value != null) {
-                       postContents = value; // This will contain the postContents from PostPage
-                    }
-                  });
-                },
-                // Specifying size of button and text within the button.
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF0032a0),
-                  minimumSize: Size(220, 50),
-                  textStyle: TextStyle(fontSize: 30.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0), // Add rounded corners
-                  ),
+        ],
+      ),
+      // Wrapping the ElevatedButton with Align and Expanded.
+      bottomNavigationBar: BottomAppBar(
+        color: const Color(0xFF00B9FF),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 30),
+          margin: EdgeInsets.only(top: 25.0),
+          child: ElevatedButton(
+            onPressed: () {
+              // Handle the post button click.
+              Navigator.push(
+                context,
+                // Navigate to the PostPage when the button is clicked.
+                MaterialPageRoute(
+                    builder: (context) => PostPage()
                 ),
-                // Display "New Post" as the button's text.
-                child: Text("New Post"),
+              ).then((value) {
+                if (value != null) {
+                  postContents = value; // This will contain the postContents from PostPage
+                }
+              });
+            },
+            // Specifying size of button and text within the button.
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFF0032a0),
+              minimumSize: Size(220, 60),
+              textStyle: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0), // Add rounded corners
               ),
             ),
+            // Display "New Post" as the button's text.
+            child: Text("New Post"),
           ),
-        ],
+        ),
       ),
     );
   }

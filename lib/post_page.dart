@@ -16,7 +16,19 @@ class _PostPageState extends State<PostPage> {
     // This provides a basic app structure with an app bar and body.
     return Scaffold(
       // Set the app bar title.
-      appBar: AppBar(centerTitle: true, title: const Text("Create a Post")),
+      appBar: AppBar(
+          backgroundColor: Color(0xFF00B9FF),
+          centerTitle: true,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Color(0xFF0032A0)),
+          title: const Text("Create a Post",
+            style: TextStyle(
+            color: Color(0xFF0032A0),
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+          )
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
