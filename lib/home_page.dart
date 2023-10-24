@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lakervent/main.dart';
+import 'package:lakervent/database.dart';
 
 class HomePage extends State<Home> {
+  var server = DataBase();
   final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,31 @@ class HomePage extends State<Home> {
                   )),
             ),
           ),
+          //posts
+          StreamBuilder(
+              //no data
+              stream: server.getPosts(),
+              builder: (context, snapshot) {
+                final posts = snapshot.data!.docs;
+                if (snapshot.data == null || posts.isEmpty) {
+                  return const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(25),
+                      child: Text("no posts"),
+                    ),
+                  );
+                }
+                return Expanded(
+                    child: ListView.builder(
+                        itemCount: posts.length,
+                        itemBuilder: (context, index) {
+                          final post = posts[index];
+
+                          String message = post['message'];
+
+                          return ListTile(title: Text(message));
+                        }));
+              })
         ],
       ),
     );
