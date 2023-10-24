@@ -5,8 +5,12 @@ import 'postObject.dart';
 
 class HomePage extends State<Home> {
   final _searchController = TextEditingController();
+  String postContents = "null";
   final List<SocialMediaPost> posts = [ //placeholder for creating posts to test formatting
     SocialMediaPost('Ugh, parking at GVSU is a never-ending nightmare! Spent 30 minutes circling for a spot today. #ParkingProblems', DateTime.now()),
+    SocialMediaPost('Midterms are here, and I\'m drowning in assignments! Need some motivation and study buddies. #StressedStudent', DateTime.now().subtract(Duration(minutes: 43))),
+    SocialMediaPost('Why does the Wi-Fi always decide to quit on me during online exams? Seriously, GVSU, we need better internet! #TechIssues', DateTime.now().subtract(Duration(minutes: 164))),
+    SocialMediaPost('Does anyone else find Mackinac confusing as heck? Got lost AGAIN today. #LostAgain', DateTime.now().subtract(Duration(minutes: 893))),
     //add more posts here as needed
   ];
 
@@ -79,23 +83,34 @@ class HomePage extends State<Home> {
             )
           ),
            // Wrapping the ElevatedButton with Align and Expanded.
-          Expanded(
-            child: Align(
-              // Align the button to the bottom center of the screen.
-              alignment: Alignment(0.0, 0.90),
+          Align(
+            // Align the button to the bottom center of the screen.
+            alignment: Alignment.center,
+            child: Container(
+              margin: EdgeInsets.only(bottom: 30.0),
               child: ElevatedButton(
                 onPressed: () {
                   // Handle the post button click.
                   Navigator.push(
                     context,
                     // Navigate to the PostPage when the button is clicked.
-                    MaterialPageRoute(builder: (context) => PostPage()),
-                  );
+                    MaterialPageRoute(
+                        builder: (context) => PostPage()
+                    ),
+                  ).then((value) {
+                    if (value != null) {
+                       postContents = value; // This will contain the postContents from PostPage
+                    }
+                  });
                 },
                 // Specifying size of button and text within the button.
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF0032a0),
                   minimumSize: Size(220, 50),
-                  textStyle: TextStyle(fontSize: 30.0)
+                  textStyle: TextStyle(fontSize: 30.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0), // Add rounded corners
+                  ),
                 ),
                 // Display "New Post" as the button's text.
                 child: Text("New Post"),

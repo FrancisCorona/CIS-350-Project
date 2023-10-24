@@ -43,11 +43,15 @@ class _PostPageState extends State<PostPage> {
                   setState(() {
                     text = postContents;
                   });
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(postContents);
                 },
                 style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(150, 60),
+                  backgroundColor: Color(0xFF0032a0),
+                  minimumSize: const Size(220, 50),
                   textStyle: const TextStyle(fontSize: 24.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0), // Add rounded corners
+                  ),
                 ),
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 5.0),
