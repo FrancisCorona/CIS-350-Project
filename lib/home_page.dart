@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lakervent/main.dart';
 import 'post_page.dart';
+import 'postObject.dart';
 
 class HomePage extends State<Home> {
   final _searchController = TextEditingController();
+  final List<SocialMediaPost> posts = [ //placeholder for creating posts to test formatting
+    SocialMediaPost('Ugh, parking at GVSU is a never-ending nightmare! Spent 30 minutes circling for a spot today. #ParkingProblems', DateTime.now()),
+    //add more posts here as needed
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +39,44 @@ class HomePage extends State<Home> {
                 )
               ),
             ),
+          ),
+          // Display the posts using a ListView.builder
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: EdgeInsets.all(8.0),
+                  margin: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1.0, color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        posts[index].timeAgo,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Padding (
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                        child: Text(
+                          posts[index].content,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            )
           ),
            // Wrapping the ElevatedButton with Align and Expanded.
           Expanded(
