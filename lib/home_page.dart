@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lakervent/main.dart';
-import 'post.dart';
+import 'post_page.dart';
 
 class HomePage extends State<Home> {
   final _searchController = TextEditingController();
