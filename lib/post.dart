@@ -13,6 +13,35 @@ class PostPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+          
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: "Write your post",
+                  border: InputBorder.none,
+                ),
+                maxLines: null,
+              ),
+            ),
+            Spacer(),
+
+            Container(
+              margin: EdgeInsets.only(bottom: 20.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(150, 60),
+                  textStyle: TextStyle(fontSize: 24.0),
+                ),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 5.0),
+                  child: Text("Post"),
+                ),
+              ),
+            ),
           ],
         ),
       ),
