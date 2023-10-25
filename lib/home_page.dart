@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lakervent/main.dart';
 import 'post_page.dart';
 import 'postObject.dart';
+import 'filterDropDownMenu.dart';
 
 class HomePage extends State<Home> {
   final _searchController = TextEditingController();
@@ -32,34 +33,47 @@ class HomePage extends State<Home> {
         ),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            //create the search bar
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white.withOpacity(0.5),
-                contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                  borderSide: const BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
+          Container(
+            height: 50,
+            padding: const EdgeInsets.only(
+              top: 5,
+              left: 10,
+              right: 15,
+              bottom: 5,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  //create the search bar
+                  child: TextField(
+                    textAlignVertical: TextAlignVertical.center,
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                        isCollapsed: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          borderSide: const BorderSide(width: 0.8),
+                        ),
+                        hintText: "Search Posts",
+                        //create the search icon on the left
+                        prefixIcon: const Icon(Icons.search, size: 30.0),
+                        //creates the X icon on the right
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            _searchController.clear();
+                          },
+                        )),
+                    ),
                   ),
+                const SizedBox(width: 10),
+                Container(
+                  child: FilterDropDownMenu(),
                 ),
-                hintText: "Search Posts",
-                //create the search icon on the left
-                prefixIcon: const Icon(Icons.search, size: 30.0),
-                //creates the X icon on the right
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    _searchController.clear();
-                  },
-                )
-              ),
+              ],
             ),
           ),
           // Display the posts using a ListView.builder
