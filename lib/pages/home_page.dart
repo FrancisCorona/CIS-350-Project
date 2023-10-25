@@ -130,19 +130,24 @@ class HomePage extends State<Home> {
           padding: EdgeInsets.symmetric(horizontal: 30),
           margin: EdgeInsets.only(top: 25.0),
           child: ElevatedButton(
-            onPressed: () {
-              // Handle the post button click.
-              Navigator.push(
+            onPressed: () async {
+              final result = await Navigator.push(
                 context,
-                // Navigate to the PostPage when the button is clicked.
                 MaterialPageRoute(
-                    builder: (context) => PostPage()
+                  builder: (context) => PostPage(),
                 ),
-              ).then((value) {
-                if (value != null) {
-                  postContents = value; // This will contain the postContents from PostPage
-                }
-              });
+              );
+
+              if (result != null && result.isNotEmpty) {
+                final newPost = SocialMediaPost(
+                  result, // Use the postContents from PostPage
+                  DateTime.now(),
+                );
+
+                setState(() {
+                  posts.insert(0, newPost); // Insert the new post at the beginning of the list
+                });
+              }
             },
             // Specifying size of button and text within the button.
             style: ElevatedButton.styleFrom(

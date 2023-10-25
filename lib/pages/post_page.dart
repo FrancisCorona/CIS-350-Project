@@ -41,6 +41,7 @@ class _PostPageState extends State<PostPage> {
                   border: InputBorder.none,
                 ),
                 maxLines: null,
+                autofocus: true,
                 onChanged: (newText) {
                     postContents = newText;
                 },

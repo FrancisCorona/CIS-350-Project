@@ -1,3 +1,5 @@
+import 'dart:async';
+
 class SocialMediaPost {
   String content;
   DateTime timestamp;
@@ -5,6 +7,12 @@ class SocialMediaPost {
 
   SocialMediaPost(this.content, this.timestamp) {
     timeAgo = formatTimeAgo(timestamp);
+
+    // Schedule a timer to update the timeAgo property periodically
+    const duration = Duration(minutes: 1); // Update every minute, adjust as needed
+    Timer.periodic(duration, (timer) {
+      timeAgo = formatTimeAgo(timestamp);
+    });
   }
 
   String formatTimeAgo(DateTime time) {
