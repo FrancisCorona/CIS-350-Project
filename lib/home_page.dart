@@ -17,7 +17,7 @@ class HomePage extends State<Home> {
             padding: const EdgeInsets.only(
               top: 5,
               left: 10,
-              right: 15,
+              right: 10,
               bottom: 5,
             ),
             child: Row(
@@ -48,6 +48,7 @@ class HomePage extends State<Home> {
                   ),
                 const SizedBox(width: 10),
                 Container(
+                  width: 167,
                   child: FilterDropDownMenu(),
                 ),
               ],

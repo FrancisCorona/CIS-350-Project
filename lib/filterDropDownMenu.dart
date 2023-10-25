@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 final List<String> list = <String>['Recent', 'Oldest', 'Hottest', 'Most Liked'];
 
@@ -12,42 +13,44 @@ class _FilterDropDownMenuState extends State<FilterDropDownMenu> {
   String dropdownValue = list.first;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 130,
-      padding: EdgeInsets.all(7),
-      decoration: BoxDecoration(
-        border: Border.all(
-            color: Colors.black26,
-            width: 1.0), // Border style
-        borderRadius: BorderRadius.circular(20.0), // Rounded corners
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          alignment: AlignmentDirectional.center,
-          isDense: true,
-          isExpanded: true,
-          iconSize: 20,
-          icon: Icon(
-              Icons.filter_alt,
-              color: Colors.grey,
-              size: 25.0,
-            ),
-          value: dropdownValue,
-          //When a new item is selected switch to that item
-          onChanged: (String? value) {
-            setState(() {
-              dropdownValue = value!;
-            });
-          },
-          //Converts the list to a map with the key and value being the same
-          items: list.map<DropdownMenuItem<String>>((value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Center(
-                child: Text(value),
+    return Scaffold(
+      body: Center(
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton2<String>(
+            alignment: AlignmentDirectional.center,
+            isExpanded: true,
+            value: dropdownValue,
+            //When a new item is selected switch to that item
+            onChanged: (String? value) {
+              setState(() {
+                dropdownValue = value!;
+              });
+            },
+            buttonStyleData: ButtonStyleData(
+              padding: const EdgeInsets.only(left: 0, right: 14),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.grey,
               ),
-            );
-          }).toList(),
+            ),
+            iconStyleData: const IconStyleData(
+              icon: Icon(
+                Icons.filter_list, // Replace with the icon you want to use
+                size: 24, // Adjust the size as needed
+                color: Colors.black, // Adjust the color as needed
+              ),
+              iconSize: 0,
+            ),
+            //Converts the list to a map with the key and value being the same
+            items: list.map<DropdownMenuItem<String>>((value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Center(
+                  child: Text(value),
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
