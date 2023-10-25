@@ -7,41 +7,51 @@ class HomePage extends State<Home> {
   final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final appWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: const Text("LakerVent")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              width: appWidth * .7,
-              //create the search bar
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                      borderSide: const BorderSide(width: 0.8),
-                    ),
-                    hintText: "Search Posts",
-                    //create the search icon on the left
-                    prefixIcon: const Icon(Icons.search, size: 30.0),
-                    //creates the X icon on the right
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {
-                        _searchController.clear();
-                      },
-                    )),
-              ),
+          Container(
+            height: 50,
+            padding: const EdgeInsets.only(
+              top: 5,
+              left: 10,
+              right: 15,
+              bottom: 5,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FilterDropDownMenu(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  //create the search bar
+                  child: TextField(
+                    textAlignVertical: TextAlignVertical.center,
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                        isCollapsed: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          borderSide: const BorderSide(width: 0.8),
+                        ),
+                        hintText: "Search Posts",
+                        //create the search icon on the left
+                        prefixIcon: const Icon(Icons.search, size: 30.0),
+                        //creates the X icon on the right
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            _searchController.clear();
+                          },
+                        )),
+                    ),
+                  ),
+                const SizedBox(width: 10),
+                Container(
+                  child: FilterDropDownMenu(),
+                ),
+              ],
+            ),
           ),
           // Wrapping the ElevatedButton with Align and Expanded.
           Expanded(
