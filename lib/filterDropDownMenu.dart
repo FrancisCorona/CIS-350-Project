@@ -9,15 +9,15 @@ class FilterDropDownMenu extends StatefulWidget {
 }
 
 class _FilterDropDownMenuState extends State<FilterDropDownMenu> {
-  String dropDownItem = list.first;
+  String dropdownValue = list.first;
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      value: list.first,
+      value: dropdownValue,
       //When a new item is selected switch to that item
       onChanged: (String? value) {
         setState(() {
-          dropDownItem = value!;
+          dropdownValue = value!;
         });
       },
       //Convers the list to a map with the key and value being the same
