@@ -8,7 +8,7 @@ class PostStream extends StatefulWidget {
 }
 
 class _PostStream extends State<PostStream> {
-  final server = DataBase();
+  final server = DataBase.getInstance();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

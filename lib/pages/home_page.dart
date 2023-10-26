@@ -28,7 +28,7 @@ class HomePage extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final server = DataBase();
+    final server = DataBase.getInstance();
     return Scaffold(
       backgroundColor: const Color(0xFF8BD5FF),
       appBar: AppBar(

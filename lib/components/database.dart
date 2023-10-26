@@ -1,9 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//implement the Singleton design pattern
 class DataBase {
   //Get a reference of the posts collection from the database
   static final CollectionReference posts =
       FirebaseFirestore.instance.collection('posts');
+
+  static DataBase instance = DataBase._();
+  //Make the constructor private
+  DataBase._();
+
+  static DataBase getInstance() {
+    return instance;
+  }
 
   //Post
   Stream<QuerySnapshot> getPosts() {
