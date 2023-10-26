@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'database.dart';
 
 class SocialMediaPost {
   String content;
   DateTime timestamp;
   String timeAgo = 'null';
+  static List<SocialMediaPost> posts = [];
 
   SocialMediaPost(this.content, this.timestamp) {
     timeAgo = formatTimeAgo(timestamp);

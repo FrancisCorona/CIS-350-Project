@@ -3,6 +3,8 @@ import 'package:lakervent/main.dart';
 import 'post_page.dart';
 import '../components/postObject.dart';
 import '../components/filterDropDownMenu.dart';
+import "../components/database.dart";
+import "../components/postStream.dart";
 
 class HomePage extends State<Home> {
   final _searchController = TextEditingController();
@@ -26,6 +28,7 @@ class HomePage extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final server = DataBase();
     return Scaffold(
       backgroundColor: const Color(0xFF8BD5FF),
       appBar: AppBar(
@@ -84,51 +87,9 @@ class HomePage extends State<Home> {
               ],
             ),
           ),
-          // Display the posts using a ListView.builder
-          Expanded(
-              child: ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: posts.length,
-            itemBuilder: (context, index) {
-              return Container(
-                padding: EdgeInsets.all(8.0),
-                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x3F000000),
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
-                    )
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      posts[index].timeAgo,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 8.0),
-                      child: Text(
-                        posts[index].content,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          )),
+          Container(
+            child: PostStream(),
+          )
         ],
       ),
       // Wrapping the ElevatedButton with Align and Expanded.
@@ -151,7 +112,7 @@ class HomePage extends State<Home> {
                   result, // Use the postContents from PostPage
                   DateTime.now(),
                 );
-
+                server.createPost(result);
                 setState(() {
                   posts.insert(0,
                       newPost); // Insert the new post at the beginning of the list
