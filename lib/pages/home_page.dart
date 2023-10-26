@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lakervent/main.dart';
-import 'package:lakervent/database.dart';
+import 'package:lakervent/components/database.dart';
 
 class HomePage extends State<Home> {
   var server = DataBase();
