@@ -53,9 +53,16 @@ class HomePage extends State<Home> {
                     controller: _searchController,
                     decoration: InputDecoration(
                         isCollapsed: true,
-                        border: OutlineInputBorder(
+                        filled: true,
+                        fillColor: Colors.white.withOpacity(0.5),
+                        focusedBorder:OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.black12, width: 1.0),
                           borderRadius: BorderRadius.circular(20.0),
-                          borderSide: const BorderSide(width: 0.8),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          borderSide: const BorderSide(color: Colors.black12, width: 1.0
+                          ),
                         ),
                         hintText: "Search Posts",
                         //create the search icon on the left
@@ -71,6 +78,7 @@ class HomePage extends State<Home> {
                   ),
                 const SizedBox(width: 10),
                 Container(
+                  width: 156,
                   child: FilterDropDownMenu(),
                 ),
               ],
