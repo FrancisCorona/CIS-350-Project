@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'database.dart';
+import 'postObject.dart';
 
 class PostStream extends StatefulWidget {
   const PostStream({super.key});
@@ -8,6 +9,7 @@ class PostStream extends StatefulWidget {
 }
 
 class _PostStream extends State<PostStream> {
+  final List<SocialMediaPost> postList = [];
   final server = DataBase.getInstance();
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class _PostStream extends State<PostStream> {
           }
           final posts = snapshot.data!.docs;
           if (snapshot.data == null || posts.isEmpty) {
-            //add later for if there are no posts
+            //incase the database is empty, have a message saying there are no posts
             return const Center(
               child:
                   Padding(padding: EdgeInsets.all(25), child: Text("no posts")),
@@ -34,7 +36,13 @@ class _PostStream extends State<PostStream> {
             padding: const EdgeInsets.all(8),
             itemCount: posts.length,
             itemBuilder: (context, index) {
-              final post = posts[index];
+              final postSnapshot = posts[index];
+              final post = SocialMediaPost(
+                  postSnapshot['message'],
+                  postSnapshot['timeStamp'].toDate(),
+                  postSnapshot['likes'],
+                  postSnapshot['reportCount']);
+              postList.add(post);
               return Container(
                 padding: EdgeInsets.all(8.0),
                 margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
@@ -53,7 +61,7 @@ class _PostStream extends State<PostStream> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "5 minutes ago",
+                      post.timeAgo,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
@@ -63,7 +71,7 @@ class _PostStream extends State<PostStream> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 8.0),
                       child: Text(
-                        post['message'],
+                        post.message,
                         style: const TextStyle(
                           fontWeight: FontWeight.normal,
                         ),

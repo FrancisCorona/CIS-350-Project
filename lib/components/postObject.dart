@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'database.dart';
 
 class SocialMediaPost {
-  String content;
+  String message;
   DateTime timestamp;
+  int likes;
+  int reportCount;
   String timeAgo = 'null';
   static List<SocialMediaPost> posts = [];
 
-  SocialMediaPost(this.content, this.timestamp) {
+  SocialMediaPost(this.message, this.timestamp, this.likes, this.reportCount) {
     timeAgo = formatTimeAgo(timestamp);
 
     // Schedule a timer to update the timeAgo property periodically

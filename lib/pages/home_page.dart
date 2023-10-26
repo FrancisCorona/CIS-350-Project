@@ -9,22 +9,6 @@ import "../components/postStream.dart";
 class HomePage extends State<Home> {
   final _searchController = TextEditingController();
   String postContents = "null";
-  final List<SocialMediaPost> posts = [
-    //placeholder for creating posts to test formatting
-    SocialMediaPost(
-        'Ugh, parking at GVSU is a never-ending nightmare! Spent 30 minutes circling for a spot today. #ParkingProblems',
-        DateTime.now().subtract(Duration(minutes: 5))),
-    SocialMediaPost(
-        'Midterms are here, and I\'m drowning in assignments! Need some motivation and study buddies. #StressedStudent',
-        DateTime.now().subtract(Duration(minutes: 43))),
-    SocialMediaPost(
-        'Why does the Wi-Fi always decide to quit on me during online exams? Seriously, GVSU, we need better internet! #TechIssues',
-        DateTime.now().subtract(Duration(minutes: 164))),
-    SocialMediaPost(
-        'Does anyone else find Mackinac confusing as heck? Got lost AGAIN today. #LostAgain',
-        DateTime.now().subtract(Duration(minutes: 893))),
-    //add more posts here as needed
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -108,15 +92,7 @@ class HomePage extends State<Home> {
               );
 
               if (result != null && result.isNotEmpty) {
-                final newPost = SocialMediaPost(
-                  result, // Use the postContents from PostPage
-                  DateTime.now(),
-                );
                 server.createPost(result);
-                setState(() {
-                  posts.insert(0,
-                      newPost); // Insert the new post at the beginning of the list
-                });
               }
             },
             // Specifying size of button and text within the button.
