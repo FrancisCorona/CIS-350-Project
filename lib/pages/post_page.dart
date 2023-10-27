@@ -17,17 +17,16 @@ class _PostPageState extends State<PostPage> {
     return Scaffold(
       // Set the app bar title.
       appBar: AppBar(
-          backgroundColor: Color(0xFF00B9FF),
-          centerTitle: true,
-          elevation: 0,
-          iconTheme: IconThemeData(color: Color(0xFF0032A0)),
-          title: const Text("Create a Post",
+        backgroundColor: Color(0xFF00B9FF),
+        centerTitle: true,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Color(0xFF0032A0)),
+        title: const Text("Create a Post",
             style: TextStyle(
-            color: Color(0xFF0032A0),
-            fontSize: 25,
-            fontWeight: FontWeight.w600,
-          )
-        ),
+              color: Color(0xFF0032A0),
+              fontSize: 25,
+              fontWeight: FontWeight.w600,
+            )),
       ),
       body: Center(
         child: Column(
@@ -43,12 +42,11 @@ class _PostPageState extends State<PostPage> {
                 maxLines: null,
                 autofocus: true,
                 onChanged: (newText) {
-                    postContents = newText;
+                  postContents = newText;
                 },
               ),
             ),
             const Spacer(),
-
             Container(
               margin: const EdgeInsets.only(bottom: 20.0),
               child: ElevatedButton(
@@ -63,7 +61,8 @@ class _PostPageState extends State<PostPage> {
                   minimumSize: const Size(220, 50),
                   textStyle: const TextStyle(fontSize: 24.0),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0), // Add rounded corners
+                    borderRadius:
+                        BorderRadius.circular(10.0), // Add rounded corners
                   ),
                 ),
                 child: Container(
