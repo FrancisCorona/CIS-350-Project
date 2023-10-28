@@ -4,7 +4,9 @@ import 'database.dart';
 import 'postObject.dart';
 
 class PostStream extends StatefulWidget {
-  const PostStream({super.key});
+  final String selectedFilter;
+
+  const PostStream({required this.selectedFilter, Key? key}) : super(key: key);
   @override
   State<PostStream> createState() => _PostStream();
 }
@@ -13,10 +15,12 @@ class _PostStream extends State<PostStream> {
   List<String> numbersList = NumberGenerator().numbers;
   final List<SocialMediaPost> postList = [];
   final server = DataBase.getInstance();
+  String selectedFilter = 'Recent';
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: server.getPosts(),
+      stream: server.getPosts(widget.selectedFilter),
       builder: (context, snapshot) {
         //show a loading circle
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -97,6 +101,12 @@ class _PostStream extends State<PostStream> {
       numbersList = freshNumbers;
     });
     // why use freshNumbers var? https://stackoverflow.com/a/52992836/2301224
+  }
+
+  void updateFilter(String newFilter) {
+    setState(() {
+      selectedFilter = newFilter;
+    });
   }
 }
 

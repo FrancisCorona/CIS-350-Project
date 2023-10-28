@@ -9,6 +9,15 @@ import "../components/postStream.dart";
 class HomePage extends State<Home> {
   final _searchController = TextEditingController();
   String postContents = "null";
+  String selectedFilter = 'Recent'; // Initialize the selected filter
+
+  // Define a function to handle filter changes
+  void onFilterChanged(String newFilter) {
+    setState(() {
+      selectedFilter = newFilter;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +83,19 @@ class HomePage extends State<Home> {
                 const SizedBox(width: 10),
                 Container(
                   width: 135,
-                  child: FilterDropDownMenu(),
+                  child: FilterDropDownMenu(
+                    onFilterChanged: (filter) {
+                      setState(() {
+                        selectedFilter = filter; // Update the selected filter
+                      });
+                    }
+                  )
                 ),
               ],
             ),
           ),
           Container(
-            child: PostStream(),
+            child: PostStream(selectedFilter: selectedFilter),
           )
         ],
       ),

@@ -4,7 +4,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 final List<String> list = <String>['Recent', 'Oldest', 'Hottest', 'Most Liked'];
 
 class FilterDropDownMenu extends StatefulWidget {
-  const FilterDropDownMenu({super.key});
+  final Function(String) onFilterChanged;
+  const FilterDropDownMenu({super.key, required this.onFilterChanged});
   @override
   State<FilterDropDownMenu> createState() => _FilterDropDownMenuState();
 }
@@ -26,6 +27,7 @@ class _FilterDropDownMenuState extends State<FilterDropDownMenu> {
               setState(() {
                 dropdownValue = value!;
               });
+              widget.onFilterChanged(dropdownValue);
             },
             buttonStyleData: ButtonStyleData(
               width: 135,

@@ -15,13 +15,28 @@ class DataBase {
   }
 
   //Post
-  Stream<QuerySnapshot> getPosts() {
-    final orderedPosts = FirebaseFirestore.instance
-        .collection('posts')
-        .orderBy('timeStamp', descending: true)
-        .snapshots();
-    return orderedPosts;
+  Stream<QuerySnapshot> getPosts(String selectedFilter) {
+    CollectionReference postsCollection = FirebaseFirestore.instance.collection('posts');
+
+    // Define a query reference
+    Query query = postsCollection;
+
+    if (selectedFilter == 'Recent') {
+      query = query.orderBy('timeStamp', descending: true);
+    } else if (selectedFilter == 'Oldest') {
+      query = query.orderBy('timeStamp', descending: false);
+    } else if (selectedFilter == 'Hottest') { // Need to implement hottest algorithm
+      query = query.orderBy('timeStamp', descending: true);
+    } else if (selectedFilter == 'Most Liked') {
+      query = query.orderBy('likes', descending: true);
+    } else { // Default if invalid filter gets selected somehow
+      query = query.orderBy('timeStamp', descending: true);
+    }
+
+    // Return the stream of snapshots
+    return query.snapshots();
   }
+
 
   //create post
   Future<DocumentReference<Map<String, dynamic>>> createPost(String message) {
