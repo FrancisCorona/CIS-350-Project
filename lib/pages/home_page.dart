@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lakervent/main.dart';
 import 'post_page.dart';
-import '../components/postObject.dart';
 import '../components/filterDropDownMenu.dart';
 import "../components/database.dart";
 import "../components/postStream.dart";
+import "../components/searchBox.dart";
 
 class HomePage extends State<Home> {
-  final _searchController = TextEditingController();
   String postContents = "null";
   String selectedFilter = 'Recent'; // Initialize the selected filter
 
@@ -17,7 +16,6 @@ class HomePage extends State<Home> {
       selectedFilter = newFilter;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,44 +39,13 @@ class HomePage extends State<Home> {
         children: [
           Container(
             height: 50,
-            padding: const EdgeInsets.only(
-              top: 5,
-              left: 10,
-              right: 15,
-              bottom: 5,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Expanded(
                   //create the search bar
-                  child: TextField(
-                    textAlignVertical: TextAlignVertical.center,
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                        isCollapsed: true,
-                        filled: true,
-                        fillColor: Colors.white.withOpacity(0.5),
-                        focusedBorder:OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.black12, width: 1.0),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                          borderSide: const BorderSide(color: Colors.black12, width: 1.0
-                          ),
-                        ),
-                        hintText: "Search Posts",
-                        //create the search icon on the left
-                        prefixIcon: const Icon(Icons.search, size: 30.0),
-                        //creates the X icon on the right
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            _searchController.clear();
-                          },
-                        )),
-                  ),
+                  child: SearchBox(),
                 ),
                 const SizedBox(width: 10),
                 Container(
