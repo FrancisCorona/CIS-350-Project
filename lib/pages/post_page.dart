@@ -7,7 +7,7 @@ class PostPage extends StatefulWidget {
 
 // Creating a class called PostPage that extends StatelessWidget.
 class _PostPageState extends State<PostPage> {
-  String postContents = 'null';
+  String postContents = '';
   late String text;
 
   @override

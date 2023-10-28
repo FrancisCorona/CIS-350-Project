@@ -114,7 +114,7 @@ class HomePage extends State<Home> {
                 ),
               );
 
-              if (result != null && result.isNotEmpty) {
+              if (result.isNotEmpty) {
                 server.createPost(result);
               }
             },

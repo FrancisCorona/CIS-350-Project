@@ -100,7 +100,6 @@ class _PostStream extends State<PostStream> {
     setState(() {
       numbersList = freshNumbers;
     });
-    // why use freshNumbers var? https://stackoverflow.com/a/52992836/2301224
   }
 
   void updateFilter(String newFilter) {
@@ -110,13 +109,13 @@ class _PostStream extends State<PostStream> {
   }
 }
 
+// pull-to-refresh code
 class NumberGenerator {
   Future<List<String>> slowNumbers() async {
     return Future.delayed(const Duration(milliseconds: 1000), () => numbers,);
   }
 
   List<String> get numbers => List.generate(5, (index) => number);
-
 
   String get number => Random().nextInt(99999).toString();
 }
