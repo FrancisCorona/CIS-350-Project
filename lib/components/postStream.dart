@@ -68,12 +68,22 @@ class _PostStream extends State<PostStream> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        post.timeAgo,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            post.timeAgo,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Icon(
+                            Icons.flag,
+                            color: Colors.grey,
+                            size: 20,
+                          )
+                        ],
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -86,25 +96,50 @@ class _PostStream extends State<PostStream> {
                         ),
                       ),
                        Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            post.likes.toString(),
+                          Row( // Comments
+                              children: [
+                                Icon(
+                                  Icons.chat_bubble,
+                                  color: Colors.grey,
+                                  size: 18.0,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  "Comments",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey,
+                                  )
+                                )
+                              ]
                           ),
-                          // SizedBox( // Unliked heart
-                          //   child: Icon(
-                          //   Icons.favorite_border,
-                          //   color: Colors.grey,
-                          //   size: 20.0,
-                          // ),
-                          // ),
-                          SizedBox( // Liked heart
-                            child: Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                              size: 20.0,
-                            ),
-                          )
+                          Row( // Like Heart
+                            children: [
+                              Text(
+                                post.likes.toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              // SizedBox( // Unliked heart
+                              //   child: Icon(
+                              //   Icons.favorite_border,
+                              //   color: Colors.grey,
+                              //   size: 20.0,
+                              // ),
+                              // ),
+                              // Liked heart
+                              SizedBox(width: 1),
+                              Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                                size: 20.0,
+                              ),
+                            ],
+                          ),
                         ],
                       )
                     ],
