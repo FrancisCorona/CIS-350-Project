@@ -24,7 +24,7 @@ class _PostStream extends State<PostStream> {
           }
           final posts = snapshot.data!.docs;
           if (snapshot.data == null || posts.isEmpty) {
-            //incase the database is empty, have a message saying there are no posts
+            //in case the database is empty, have a message saying there are no posts
             return const Center(
               child:
                   Padding(padding: EdgeInsets.all(25), child: Text("no posts")),

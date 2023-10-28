@@ -7,6 +7,7 @@ import 'components/firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: 'LakerVent',
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MaterialApp(
