@@ -28,7 +28,8 @@ class _FilterDropDownMenuState extends State<FilterDropDownMenu> {
               });
             },
             buttonStyleData: ButtonStyleData(
-              padding: const EdgeInsets.only(right:14),
+              width: 135,
+              padding: const EdgeInsets.only(right:6),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(20),
@@ -40,7 +41,7 @@ class _FilterDropDownMenuState extends State<FilterDropDownMenu> {
             iconStyleData: const IconStyleData(
               icon: Icon(
                 Icons.filter_list_alt,
-                color: Colors.grey,
+                color: Color(0x80000000),
                 size: 25.0,
               ),
             ),
@@ -54,7 +55,12 @@ class _FilterDropDownMenuState extends State<FilterDropDownMenu> {
               return DropdownMenuItem<String>(
                 value: value,
                 child: Center(
-                  child: Text(value),
+                  child: Text(
+                    value,
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.6),
+                    )
+                  ),
                 ),
               );
             }).toList(),

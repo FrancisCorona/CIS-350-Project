@@ -73,7 +73,7 @@ class HomePage extends State<Home> {
                 ),
                 const SizedBox(width: 10),
                 Container(
-                  width: 156,
+                  width: 135,
                   child: FilterDropDownMenu(),
                 ),
               ],
