@@ -52,7 +52,7 @@ class _PostStream extends State<PostStream> {
                     postSnapshot['reportCount']);
                 postList.add(post);
                 return Container(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                   margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -75,7 +75,7 @@ class _PostStream extends State<PostStream> {
                           color: Colors.grey,
                         ),
                       ),
-                      Padding(
+                      Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8.0, vertical: 8.0),
                         child: Text(
@@ -85,6 +85,28 @@ class _PostStream extends State<PostStream> {
                           ),
                         ),
                       ),
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            post.likes.toString(),
+                          ),
+                          // SizedBox( // Unliked heart
+                          //   child: Icon(
+                          //   Icons.favorite_border,
+                          //   color: Colors.grey,
+                          //   size: 20.0,
+                          // ),
+                          // ),
+                          SizedBox( // Liked heart
+                            child: Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                              size: 20.0,
+                            ),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 );
