@@ -2,27 +2,118 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'database.dart';
+import 'like_button.dart';
 
-class SocialMediaPost {
-  String message;
-  DateTime timestamp;
-  int likes;
-  int reportCount;
-  String timeAgo = 'null';
-  static List<SocialMediaPost> posts = [];
+class SocialMediaPost extends StatefulWidget {
+  final String message;
+  final DateTime timeStamp;
+  final int likes;
+  final int reportCount;
 
-  SocialMediaPost(this.message, this.timestamp, this.likes, this.reportCount) {
-    timeAgo = formatTimeAgo(timestamp);
+  const SocialMediaPost({Key? key, required this.message, required this.timeStamp, required this.likes, required this.reportCount}) : super(key: key);
 
-    // Schedule a timer to update the timeAgo property periodically
-    const duration =
-        Duration(minutes: 1); // Update every minute, adjust as needed
-    Timer.periodic(duration, (timer) {
-      timeAgo = formatTimeAgo(timestamp);
+  @override
+  State<SocialMediaPost> createState() => _SocialMediaPostState();
+}
+
+class _SocialMediaPostState extends State<SocialMediaPost> {
+  bool isLiked = true;
+
+  void toggleLike() {
+    setState(() {
+      isLiked = !isLiked;
     });
   }
 
-
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x3F000000),
+            blurRadius: 5,
+            offset: Offset(0, 2),
+          )
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                formatTimeAgo(widget.timeStamp),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+              const Icon(
+                Icons.flag,
+                color: Colors.grey,
+                size: 20,
+              )
+            ],
+          ),
+          // Message Contents
+          Container(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 8.0, vertical: 8.0),
+            child: Text(
+              widget.message,
+              style: const TextStyle(
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ),
+          // Comment footer: Comments and Likes
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Comments
+              const Row(
+                  children: [
+                    Icon(
+                      Icons.chat_bubble,
+                      color: Colors.grey,
+                      size: 18.0,
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                        "Comments",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        )
+                    )
+                  ]
+              ),
+              // Like heart
+              Row(
+                children: [
+                  Text(
+                    widget.likes.toString(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  const SizedBox(width: 1),
+                  LikeButton(isLiked: isLiked, onTap: toggleLike)
+                ],
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
 
   String formatTimeAgo(DateTime time) {
     final now = DateTime.now();

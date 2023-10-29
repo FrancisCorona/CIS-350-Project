@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'database.dart';
 import 'postObject.dart';
-import "like_button.dart";
 
 class PostStream extends StatefulWidget {
   final String selectedFilter;
@@ -17,13 +16,6 @@ class _PostStream extends State<PostStream> {
   final List<SocialMediaPost> postList = [];
   final server = DataBase.getInstance();
   String selectedFilter = 'Recent';
-  bool isLiked = true;
-
-  void toggleLike() {
-    setState(() {
-      isLiked = !isLiked;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +24,7 @@ class _PostStream extends State<PostStream> {
       builder: (context, snapshot) {
         //show a loading circle
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -50,101 +42,15 @@ class _PostStream extends State<PostStream> {
             onRefresh: _pullRefresh,
             child: ListView.builder(
               padding: const EdgeInsets.all(8),
-              itemCount: posts.length,
+              itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 final postSnapshot = posts[index];
-                final post = SocialMediaPost(
-                    postSnapshot['message'],
-                    postSnapshot['timeStamp'].toDate(),
-                    postSnapshot['likes'],
-                    postSnapshot['reportCount']);
-                postList.add(post);
-                // Post card
-                return Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x3F000000),
-                        blurRadius: 5,
-                        offset: Offset(0, 2),
-                      )
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            post.timeAgo,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Icon(
-                            Icons.flag,
-                            color: Colors.grey,
-                            size: 20,
-                          )
-                        ],
-                      ),
-                      // Message Contents
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 8.0),
-                        child: Text(
-                          post.message,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                       // Comment footer: Comments and Likes
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Comments
-                          Row(
-                              children: [
-                                Icon(
-                                  Icons.chat_bubble,
-                                  color: Colors.grey,
-                                  size: 18.0,
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  "Comments",
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.grey,
-                                  )
-                                )
-                              ]
-                          ),
-                          // Like heart
-                          Row(
-                            children: [
-                              Text(
-                                post.likes.toString(),
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              SizedBox(width: 1),
-                              LikeButton(isLiked: true, onTap: (){},),
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                //Post card
+                return SocialMediaPost(
+                    message: postSnapshot['message'],
+                    timeStamp: postSnapshot['timeStamp'].toDate(),
+                    likes: postSnapshot['likes'],
+                    reportCount: postSnapshot['reportCount']
                 );
               },
             ),
