@@ -4,7 +4,7 @@ import 'post_page.dart';
 import '../components/filterDropDownMenu.dart';
 import "../components/database.dart";
 import "../components/postStream.dart";
-import "../components/searchBox.dart";
+import "../components/search_box.dart";
 
 class HomePage extends State<Home> {
   String postContents = "null";
@@ -35,7 +35,7 @@ class HomePage extends State<Home> {
             )),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             height: 50,
@@ -44,7 +44,6 @@ class HomePage extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Expanded(
-                  //create the search bar
                   child: SearchBox(),
                 ),
                 const SizedBox(width: 10),

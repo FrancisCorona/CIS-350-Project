@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'database.dart';
 import 'postObject.dart';
+import "like_button.dart";
 
 class PostStream extends StatefulWidget {
   final String selectedFilter;
@@ -16,6 +17,13 @@ class _PostStream extends State<PostStream> {
   final List<SocialMediaPost> postList = [];
   final server = DataBase.getInstance();
   String selectedFilter = 'Recent';
+  bool isLiked = true;
+
+  void toggleLike() {
+    setState(() {
+      isLiked = !isLiked;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +59,7 @@ class _PostStream extends State<PostStream> {
                     postSnapshot['likes'],
                     postSnapshot['reportCount']);
                 postList.add(post);
+                // Post card
                 return Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                   margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
@@ -85,6 +94,7 @@ class _PostStream extends State<PostStream> {
                           )
                         ],
                       ),
+                      // Message Contents
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8.0, vertical: 8.0),
@@ -95,10 +105,12 @@ class _PostStream extends State<PostStream> {
                           ),
                         ),
                       ),
+                       // Comment footer: Comments and Likes
                        Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row( // Comments
+                          // Comments
+                          Row(
                               children: [
                                 Icon(
                                   Icons.chat_bubble,
@@ -115,7 +127,8 @@ class _PostStream extends State<PostStream> {
                                 )
                               ]
                           ),
-                          Row( // Like Heart
+                          // Like heart
+                          Row(
                             children: [
                               Text(
                                 post.likes.toString(),
@@ -124,20 +137,8 @@ class _PostStream extends State<PostStream> {
                                   color: Colors.grey,
                                 ),
                               ),
-                              // SizedBox( // Unliked heart
-                              //   child: Icon(
-                              //   Icons.favorite_border,
-                              //   color: Colors.grey,
-                              //   size: 20.0,
-                              // ),
-                              // ),
-                              // Liked heart
                               SizedBox(width: 1),
-                              Icon(
-                                Icons.favorite,
-                                color: Colors.red,
-                                size: 20.0,
-                              ),
+                              LikeButton(isLiked: true, onTap: (){},),
                             ],
                           ),
                         ],

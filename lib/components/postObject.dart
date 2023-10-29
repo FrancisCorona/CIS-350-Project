@@ -22,11 +22,15 @@ class SocialMediaPost {
     });
   }
 
+
+
   String formatTimeAgo(DateTime time) {
     final now = DateTime.now();
     final difference = time.isBefore(now) ? now.difference(time) : Duration();
 
-    if (difference.inMinutes < 60) {
+    if (difference.inSeconds < 60) {
+      return 'Posted now';
+    } else if (difference.inMinutes < 60) {
       return 'Posted ${difference.inMinutes}m ago';
     } else if (difference.inHours < 24) {
       final hours = difference.inHours;
