@@ -80,7 +80,7 @@ class HomePage extends State<Home> {
                 ),
               );
 
-              if (result.isNotEmpty) {
+              if (result != null && result.isNotEmpty) {
                 server.createPost(result);
               }
             },
