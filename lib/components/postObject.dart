@@ -19,6 +19,12 @@ class SocialMediaPost extends StatefulWidget {
 class _SocialMediaPostState extends State<SocialMediaPost> {
   bool isLiked = true;
 
+  @override
+  void initState() {
+    super.initState();
+    isLiked = null; //getLikesFromDatabase
+  }
+
   void toggleLike() {
     setState(() {
       isLiked = !isLiked;
