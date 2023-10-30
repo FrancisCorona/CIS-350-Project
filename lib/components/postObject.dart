@@ -38,6 +38,7 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
 
     if (isLiked) {
       await LikeManager.likePost(widget.postID);
+
     } else {
       await LikeManager.unlikePost(widget.postID);
     }
