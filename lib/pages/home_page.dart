@@ -43,21 +43,33 @@ final server = DataBase.getInstance(); // Create instance of DataBase class
       backgroundColor: const Color(0xFF00B9FF),
       centerTitle: true,
       elevation: 0,
-      title: const Text("LakerVent",
-          style: TextStyle(
-            color: Color(0xFF0032A0),
-            fontSize: 35,
-            fontWeight: FontWeight.w700,
-            height: 0.8,
-          )),
+      title: const Text(
+        "LakerVent",
+        style: TextStyle(
+          color: Color(0xFF0032A0),
+          fontSize: 35,
+          fontWeight: FontWeight.w700,
+          height: 0.8,
+        ),
+      ),
+    );
+  }
+
+// Main body of the screen with search box, filter, and post.
+  Widget buildBody() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        buildSearchBoxAndFilterDropDownMenu(),
+        Container(
+          child: PostStream(selectedFilter: selectedFilter),
+        ),
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
           Container(
             height: 50,
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
