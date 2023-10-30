@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   String postContents = "null"; // Initialize postContents with null
   String selectedFilter = 'Recent'; // Initialize the selected filter
 
-
+final server = DataBase.getInstance(); // Create instance of DataBase class
 
   // Define a function to handle filter changes
   void onFilterChanged(String newFilter) {
