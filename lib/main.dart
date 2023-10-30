@@ -18,10 +18,11 @@ void main() async {
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({Key? key}); 
 
   @override
   State<StatefulWidget> createState() {
     return HomePage();
+
   }
 }
