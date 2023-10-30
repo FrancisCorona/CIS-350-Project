@@ -1,35 +1,54 @@
-import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'database.dart';
 import 'like_button.dart';
+import 'like_manager.dart';
 
 class SocialMediaPost extends StatefulWidget {
+  final String postID;
   final String message;
   final DateTime timeStamp;
   final int likes;
   final int reportCount;
 
-  const SocialMediaPost({Key? key, required this.message, required this.timeStamp, required this.likes, required this.reportCount}) : super(key: key);
+  const SocialMediaPost({Key? key, required this.message, required this.timeStamp, required this.likes, required this.reportCount, required this.postID}) : super(key: key);
 
   @override
   State<SocialMediaPost> createState() => _SocialMediaPostState();
 }
 
 class _SocialMediaPostState extends State<SocialMediaPost> {
-  bool isLiked = true;
+  bool isLiked = false;
 
-  void toggleLike() {
+  @override
+  void initState() {
+    super.initState();
+    _loadLikedState();
+  }
+
+  Future<void> _loadLikedState() async {
+    final liked = await LikeManager.isLiked(widget.postID);
+    setState(() {
+      isLiked = liked;
+    });
+  }
+
+  Future<void> toggleLike() async {
     setState(() {
       isLiked = !isLiked;
     });
+
+    if (isLiked) {
+      await LikeManager.likePost(widget.postID);
+
+    } else {
+      await LikeManager.unlikePost(widget.postID);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
@@ -105,7 +124,10 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                     ),
                   ),
                   const SizedBox(width: 1),
-                  LikeButton(isLiked: isLiked, onTap: toggleLike)
+                  LikeButton(
+                    isLiked: isLiked,
+                    onTap: () {toggleLike();},
+                  )
                 ],
               ),
             ],
@@ -135,4 +157,5 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
       return 'Posted ${daysDecimal.toStringAsFixed(1)}d ago';
     }
   }
+
 }

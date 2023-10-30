@@ -41,7 +41,7 @@ class _PostStream extends State<PostStream> {
           child: RefreshIndicator.adaptive(
             onRefresh: _pullRefresh,
             child: ListView.builder(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 final postSnapshot = posts[index];
@@ -50,7 +50,8 @@ class _PostStream extends State<PostStream> {
                     message: postSnapshot['message'],
                     timeStamp: postSnapshot['timeStamp'].toDate(),
                     likes: postSnapshot['likes'],
-                    reportCount: postSnapshot['reportCount']
+                    reportCount: postSnapshot['reportCount'],
+                    postID: postSnapshot.id,
                 );
               },
             ),
