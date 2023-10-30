@@ -68,36 +68,36 @@ final server = DataBase.getInstance(); // Create instance of DataBase class
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
+  // Creates and returns widget for search/ filter.
+  // Allow users to select filters.
+  Widget buildSearchBoxAndFilterDropDownMenu() {
+    return Container(
+      height: 50,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Expanded(
+            child: SearchBox(),
+          ),
+          const SizedBox(width: 10),
           Container(
-            height: 50,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: SearchBox(),
-                ),
-                const SizedBox(width: 10),
-                Container(
-                  width: 135,
-                  child: FilterDropDownMenu(
-                    onFilterChanged: (filter) {
-                      setState(() {
-                        selectedFilter = filter; // Update the selected filter
-                      });
-                    }
-                  )
-                ),
-              ],
+            width: 135,
+            child: FilterDropDownMenu(
+              onFilterChanged: (filter) {
+                setState(() {
+                  selectedFilter = filter; // Update the selected filter
+                });
+              },
             ),
           ),
-          Container(
-            child: PostStream(selectedFilter: selectedFilter),
-          )
         ],
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
       // Wrapping the ElevatedButton with Align and Expanded.
       bottomNavigationBar: BottomAppBar(
         color: const Color(0xFF00B9FF),
