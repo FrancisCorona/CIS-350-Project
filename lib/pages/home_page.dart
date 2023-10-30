@@ -7,6 +7,7 @@ import "../components/postStream.dart";
 import "../components/search_box.dart";
 
 class HomePage extends State<Home> {
+  final _searchController = TextEditingController();
   String postContents = "null";
   String selectedFilter = 'Recent'; // Initialize the selected filter
 
@@ -44,7 +45,7 @@ class HomePage extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Expanded(
-                  child: SearchBox(),
+                  child: SearchBox(searchController: _searchController),
                 ),
                 const SizedBox(width: 10),
                 Container(
@@ -61,7 +62,7 @@ class HomePage extends State<Home> {
             ),
           ),
           Container(
-            child: PostStream(selectedFilter: selectedFilter),
+            child: PostStream(selectedFilter: selectedFilter, searchController: _searchController),
           )
         ],
       ),
