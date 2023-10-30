@@ -20,6 +20,7 @@ class _PostPageState extends State<PostPage> {
     );
   }
 
+  // Function to build and return the app bar widget.
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: Color(0xFF00B9FF),
@@ -37,6 +38,7 @@ class _PostPageState extends State<PostPage> {
     );
   }
 
+  // Function to build and return the main content of the page.
   Widget buildPostContent() {
     return Center(
       child: Column(
@@ -50,6 +52,7 @@ class _PostPageState extends State<PostPage> {
     );
   }
 
+  // Function to build and return an input field for writing the post.
   TextField buildPostInputField() {
     return TextField(
       decoration: InputDecoration(
@@ -66,6 +69,7 @@ class _PostPageState extends State<PostPage> {
     );
   }
 
+  // Function to build and return a button for posting the content.
   ElevatedButton buildPostButton() {
     return ElevatedButton(
       onPressed: () {

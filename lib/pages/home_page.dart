@@ -6,9 +6,18 @@ import "../components/database.dart";
 import "../components/postStream.dart";
 import "../components/search_box.dart";
 
-class HomePage extends State<Home> {
-  String postContents = "null";
+// Define class HomePage that extends StatefulWidget
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState(); // Create and return an instance of _HomePageState
+}
+
+// Define the state class for HomePage
+class _HomePageState extends State<HomePage> {
+  String postContents = "null"; // Initialize postContents with null
   String selectedFilter = 'Recent'; // Initialize the selected filter
+
+
 
   // Define a function to handle filter changes
   void onFilterChanged(String newFilter) {
