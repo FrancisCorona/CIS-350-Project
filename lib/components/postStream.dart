@@ -50,7 +50,8 @@ class _PostStream extends State<PostStream> {
                     message: postSnapshot['message'],
                     timeStamp: postSnapshot['timeStamp'].toDate(),
                     likes: postSnapshot['likes'],
-                    reportCount: postSnapshot['reportCount']
+                    reportCount: postSnapshot['reportCount'],
+                    postID: postSnapshot.id,
                 );
               },
             ),
