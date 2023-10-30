@@ -26,23 +26,35 @@ final server = DataBase.getInstance(); // Create instance of DataBase class
     });
   }
 
+// Construct screen structure with colored background, app bar, and body content.
   @override
   Widget build(BuildContext context) {
-    final server = DataBase.getInstance();
     return Scaffold(
       backgroundColor: const Color(0xFF8BD5FF),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF00B9FF),
-        centerTitle: true,
-        elevation: 0,
-        title: const Text("LakerVent",
-            style: TextStyle(
-              color: Color(0xFF0032A0),
-              fontSize: 35,
-              fontWeight: FontWeight.w700,
-              height: 0.8,
-            )),
-      ),
+      appBar: buildAppBar(),
+      body: buildBody(),
+      bottomNavigationBar: buildBottomAppBar(),
+    );
+  }
+
+// Creates and configures the app bar.
+  AppBar buildAppBar() {
+    return AppBar(
+      backgroundColor: const Color(0xFF00B9FF),
+      centerTitle: true,
+      elevation: 0,
+      title: const Text("LakerVent",
+          style: TextStyle(
+            color: Color(0xFF0032A0),
+            fontSize: 35,
+            fontWeight: FontWeight.w700,
+            height: 0.8,
+          )),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
