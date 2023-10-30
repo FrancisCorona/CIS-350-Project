@@ -96,15 +96,20 @@ final server = DataBase.getInstance(); // Create instance of DataBase class
     );
   }
 
+  // Construct/ return bottom app bar with a button.
+  BottomAppBar buildBottomAppBar() {
+    return BottomAppBar(
+      color: const Color(0xFF00B9FF),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        margin: EdgeInsets.only(top: 25.0),
+        child: buildElevatedButton(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-      // Wrapping the ElevatedButton with Align and Expanded.
-      bottomNavigationBar: BottomAppBar(
-        color: const Color(0xFF00B9FF),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          margin: EdgeInsets.only(top: 25.0),
-          child: ElevatedButton(
             onPressed: () async {
               final result = await Navigator.push(
                 context,
