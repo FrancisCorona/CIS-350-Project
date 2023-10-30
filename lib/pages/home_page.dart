@@ -108,35 +108,32 @@ final server = DataBase.getInstance(); // Create instance of DataBase class
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-            onPressed: () async {
-              final result = await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PostPage(),
-                ),
-              );
-
-              if (result != null && result.isNotEmpty) {
-                server.createPost(result);
-              }
-            },
-            // Specifying size of button and text within the button.
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF0032a0),
-              minimumSize: Size(220, 60),
-              textStyle: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600),
-              shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(20.0), // Add rounded corners
-              ),
-            ),
-            // Display "New Post" as the button's text.
-            child: Text("New Post"),
+// ElevatedButton for initiating the creation of a new post
+ElevatedButton buildElevatedButton() {
+    return ElevatedButton(
+      onPressed: () async {
+        final result = await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PostPage(),
           ),
+        );
+
+        if (result != null && result.isNotEmpty) {
+          server.createPost(result); // Access server instance here
+        }
+      },
+      // Specifying size of button and text within the button.
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color(0xFF0032a0),
+        minimumSize: Size(220, 60),
+        textStyle: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0), // Add rounded corners
         ),
       ),
+      // Display New Post as the buttons text
+      child: Text("New Post"),
     );
   }
 }
