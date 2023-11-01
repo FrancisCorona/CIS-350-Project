@@ -52,14 +52,22 @@ class DataBase {
     return post;
   }
 
+//add like to a post
   Future<void> addLike(String id) {
     return posts.doc(id).update({'likes': FieldValue.increment(1)});
   }
 
+//increment the reportCount for a post by 1
+  Future<void> report(String id) {
+    return posts.doc(id).update({'reportCount': FieldValue.increment(1)});
+  }
+
+//remove a like from a post
   Future<void> removeLike(String id) {
     return posts.doc(id).update({'likes': FieldValue.increment(-1)});
   }
 
+//getter for the posts collection reference
   CollectionReference getPostCollection() {
     return posts;
   }
