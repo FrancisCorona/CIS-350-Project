@@ -16,7 +16,8 @@ class DataBase {
 
   //Post
   Stream<QuerySnapshot> getPosts(String selectedFilter) {
-    CollectionReference postsCollection = FirebaseFirestore.instance.collection('posts');
+    CollectionReference postsCollection =
+        FirebaseFirestore.instance.collection('posts');
 
     // Define a query reference
     Query query = postsCollection;
@@ -25,18 +26,19 @@ class DataBase {
       query = query.orderBy('timeStamp', descending: true);
     } else if (selectedFilter == 'Oldest') {
       query = query.orderBy('timeStamp', descending: false);
-    } else if (selectedFilter == 'Hottest') { // Need to implement hottest algorithm
+    } else if (selectedFilter == 'Hottest') {
+      // Need to implement hottest algorithm
       query = query.orderBy('timeStamp', descending: true);
     } else if (selectedFilter == 'Most Liked') {
       query = query.orderBy('likes', descending: true);
-    } else { // Default if invalid filter gets selected somehow
+    } else {
+      // Default if invalid filter gets selected somehow
       query = query.orderBy('timeStamp', descending: true);
     }
 
     // Return the stream of snapshots
     return query.snapshots();
   }
-
 
   //create post
   Future<DocumentReference<Map<String, dynamic>>> createPost(String message) {
@@ -48,5 +50,17 @@ class DataBase {
     };
     final post = FirebaseFirestore.instance.collection('posts').add(data);
     return post;
+  }
+
+  Future<void> addLike(String id) {
+    return posts.doc(id).update({'likes': FieldValue.increment(1)});
+  }
+
+  Future<void> removeLike(String id) {
+    return posts.doc(id).update({'likes': FieldValue.increment(-1)});
+  }
+
+  CollectionReference getPostCollection() {
+    return posts;
   }
 }

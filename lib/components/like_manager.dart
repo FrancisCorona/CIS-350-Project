@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'database.dart';
 
 // SharedPreferences is used to locally track what posts a user has liked
 
 class LikeManager {
+  //get instance of database class
+  static final server = DataBase.getInstance();
   // Firestore collection reference
-  static final CollectionReference postsCollection = FirebaseFirestore.instance.collection('posts');
+  static final CollectionReference postsCollection = server.getPostCollection();
 
   // SharedPreferences key to store liked post IDs
   static const _likedPostsKey = 'liked_posts';
@@ -18,7 +21,7 @@ class LikeManager {
     if (!likedPosts.contains(postID)) {
       likedPosts.add(postID);
       await prefs.setStringList(_likedPostsKey, likedPosts);
-      await postsCollection.doc(postID).update({'likes': FieldValue.increment(1)});
+      await server.addLike(postID);
     }
   }
 
@@ -28,7 +31,7 @@ class LikeManager {
     final likedPosts = prefs.getStringList(_likedPostsKey) ?? [];
     likedPosts.remove(postID);
     await prefs.setStringList(_likedPostsKey, likedPosts);
-    await postsCollection.doc(postID).update({'likes': FieldValue.increment(-1)});
+    await server.removeLike(postID);
   }
 
   // Check if a post is liked

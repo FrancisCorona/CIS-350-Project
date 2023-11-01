@@ -7,7 +7,6 @@ import 'components/firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    name: 'LakerVent',
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MaterialApp(
@@ -20,10 +19,10 @@ void main() async {
 //Define a StatefulWidget class
 class Home extends StatefulWidget {
   // Constructor for Home class
-  const Home({Key? key}); 
+  const Home({Key? key});
 
 // Override createState method
-@override
+  @override
   _HomeState createState() {
     //Return an instance of _HomeState class
     return _HomeState();

@@ -9,7 +9,14 @@ class SocialMediaPost extends StatefulWidget {
   final int likes;
   final int reportCount;
 
-  const SocialMediaPost({Key? key, required this.message, required this.timeStamp, required this.likes, required this.reportCount, required this.postID}) : super(key: key);
+  const SocialMediaPost(
+      {Key? key,
+      required this.message,
+      required this.timeStamp,
+      required this.likes,
+      required this.reportCount,
+      required this.postID})
+      : super(key: key);
 
   @override
   State<SocialMediaPost> createState() => _SocialMediaPostState();
@@ -38,7 +45,6 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
 
     if (isLiked) {
       await LikeManager.likePost(widget.postID);
-
     } else {
       await LikeManager.unlikePost(widget.postID);
     }
@@ -82,8 +88,7 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
           ),
           // Message Contents
           Container(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 8.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
             child: Text(
               widget.message,
               style: const TextStyle(
@@ -96,23 +101,19 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Comments
-              const Row(
-                  children: [
-                    Icon(
-                      Icons.chat_bubble,
+              const Row(children: [
+                Icon(
+                  Icons.chat_bubble,
+                  color: Colors.grey,
+                  size: 18.0,
+                ),
+                SizedBox(width: 5),
+                Text("Comments",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
                       color: Colors.grey,
-                      size: 18.0,
-                    ),
-                    SizedBox(width: 5),
-                    Text(
-                        "Comments",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        )
-                    )
-                  ]
-              ),
+                    ))
+              ]),
               // Like heart
               Row(
                 children: [
@@ -126,7 +127,9 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                   const SizedBox(width: 1),
                   LikeButton(
                     isLiked: isLiked,
-                    onTap: () {toggleLike();},
+                    onTap: () {
+                      toggleLike();
+                    },
                   )
                 ],
               ),
@@ -157,5 +160,4 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
       return 'Posted ${daysDecimal.toStringAsFixed(1)}d ago';
     }
   }
-
 }
