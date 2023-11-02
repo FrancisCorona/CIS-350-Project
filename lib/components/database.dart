@@ -16,11 +16,8 @@ class DataBase {
 
   //Post
   Stream<QuerySnapshot> getPosts(String selectedFilter) {
-    CollectionReference postsCollection =
-        FirebaseFirestore.instance.collection('posts');
-
     // Define a query reference
-    Query query = postsCollection;
+    Query query = posts;
 
     if (selectedFilter == 'Recent') {
       query = query.orderBy('timeStamp', descending: true);
