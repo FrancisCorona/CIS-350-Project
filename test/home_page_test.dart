@@ -26,6 +26,21 @@ void main() {
   expect(find.text("Create a Post"), findsOneWidget);
 });
 
+// Testing filter changes.
+testWidgets('Test filter change', (WidgetTester tester) async {
+  await tester.pumpWidget(MaterialApp(home: HomePage()));
+
+  // Simulate tap on filter.
+  await tester.tap(find.byType(DropdownButton));
+  await tester.pumpAndSettle();
+
+  // Simulate tap on filter option.
+  await tester.tap(find.text('Recent')); 
+  await tester.pumpAndSettle();
+
+  expect(find.text('Recent'), findsOneWidget);
+});
+
 }
 
 
