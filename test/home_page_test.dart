@@ -22,8 +22,8 @@ void main() {
   await tester.tap(find.text("New Post"));
   await tester.pumpAndSettle();
 
-  // Check if Create a New Post is on the screen.
-  expect(find.text("Create a New Post"), findsOneWidget); // Replace with the text you expect on the PostPage
+  // Check if Create a Post is on the screen.
+  expect(find.text("Create a Post"), findsOneWidget);
 });
 
 }
