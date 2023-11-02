@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'like_button.dart';
 import 'like_manager.dart';
+import 'dislike_button.dart';
 
 class SocialMediaPost extends StatefulWidget {
   final String postID;
@@ -130,7 +131,15 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                     onTap: () {
                       toggleLike();
                     },
-                  )
+                  ),
+                  Container(
+                    child: DisLikeButton(
+                      isSelected: false,
+                      onTap: () {
+                        toggleLike();
+                      },
+                    ),
+                  ),
                 ],
               ),
             ],
