@@ -25,11 +25,13 @@ class SocialMediaPost extends StatefulWidget {
 
 class _SocialMediaPostState extends State<SocialMediaPost> {
   bool isLiked = false;
+  bool isdisLiked = false;
 
   @override
   void initState() {
     super.initState();
     _loadLikedState();
+    _loaddisLikedState();
   }
 
   Future<void> _loadLikedState() async {
@@ -39,15 +41,39 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
     });
   }
 
+  Future<void> _loaddisLikedState() async {
+    final isSelected = await LikeManager.isDisLiked(widget.postID);
+    setState(() {
+      isdisLiked = isSelected;
+    });
+  }
+
   Future<void> toggleLike() async {
     setState(() {
       isLiked = !isLiked;
+      if (isLiked) {
+        isdisLiked = false;
+      }
     });
 
     if (isLiked) {
       await LikeManager.likePost(widget.postID);
     } else {
       await LikeManager.unlikePost(widget.postID);
+    }
+  }
+
+  Future<void> toggledisLike() async {
+    setState(() {
+      isdisLiked = !isdisLiked;
+      if (isdisLiked) {
+        isLiked = false;
+      }
+    });
+    if (isdisLiked) {
+      await LikeManager.disLikePost(widget.postID);
+    } else {
+      await LikeManager.removedisLike(widget.postID);
     }
   }
 
@@ -134,9 +160,9 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                   ),
                   Container(
                     child: DisLikeButton(
-                      isSelected: false,
+                      isSelected: isdisLiked,
                       onTap: () {
-                        toggleLike();
+                        toggledisLike();
                       },
                     ),
                   ),
