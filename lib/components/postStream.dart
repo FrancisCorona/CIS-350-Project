@@ -47,11 +47,11 @@ class _PostStream extends State<PostStream> {
                 final postSnapshot = posts[index];
                 //Post card
                 return SocialMediaPost(
-                    message: postSnapshot['message'],
-                    timeStamp: postSnapshot['timeStamp'].toDate(),
-                    likes: postSnapshot['likes'],
-                    reportCount: postSnapshot['reportCount'],
-                    postID: postSnapshot.id,
+                  message: postSnapshot['message'],
+                  timeStamp: postSnapshot['timeStamp'].toDate(),
+                  likes: postSnapshot['likes'],
+                  reportCount: postSnapshot['reportCount'],
+                  postID: postSnapshot.id,
                 );
               },
             ),

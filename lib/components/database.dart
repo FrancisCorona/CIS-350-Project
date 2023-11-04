@@ -49,6 +49,17 @@ class DataBase {
         .snapshots();
   }
 
+  Future<int> countComments(String id) async {
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection("posts")
+        .doc(id)
+        .collection("Comments")
+        .get();
+
+    return querySnapshot.size;
+  }
+
+
   //create post
   Future<DocumentReference<Map<String, dynamic>>> createPost(String message) {
     final data = {
