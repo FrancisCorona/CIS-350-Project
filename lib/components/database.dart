@@ -40,6 +40,15 @@ class DataBase {
     return query.snapshots();
   }
 
+  Stream<QuerySnapshot> getComments(String id) {
+    return FirebaseFirestore.instance
+        .collection('posts')
+        .doc(id)
+        .collection("Comments")
+        .orderBy("commentTime")
+        .snapshots();
+  }
+
   //create post
   Future<DocumentReference<Map<String, dynamic>>> createPost(String message) {
     final data = {
@@ -65,6 +74,10 @@ class DataBase {
 //remove a like from a post
   Future<void> removeLike(String id) {
     return posts.doc(id).update({'likes': FieldValue.increment(-1)});
+  }
+
+  void addComment(String id, String commentText) {
+    posts.doc(id).collection("Comments").add({"commentText" : commentText, "commentTime" : Timestamp.now()});
   }
 
 //getter for the posts collection reference
