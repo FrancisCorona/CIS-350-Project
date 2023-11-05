@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'database.dart';
@@ -5,8 +6,9 @@ import 'postObject.dart';
 
 class PostStream extends StatefulWidget {
   final String selectedFilter;
+  final TextEditingController searchController;
 
-  const PostStream({required this.selectedFilter, Key? key}) : super(key: key);
+  const PostStream({required this.selectedFilter, Key? key, required this.searchController}) : super(key: key);
   @override
   State<PostStream> createState() => _PostStream();
 }
@@ -23,28 +25,28 @@ class _PostStream extends State<PostStream> {
       stream: server.getPosts(widget.selectedFilter),
       builder: (context, snapshot) {
         //show a loading circle
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        final posts = snapshot.data!.docs;
-        if (snapshot.data == null || posts.isEmpty) {
-          //in case the database is empty, have a message saying there are no posts
+        final allPosts = snapshot.data!.docs;
+        if (snapshot.data == null || allPosts.isEmpty) {
+          //in case the database is empty, have a message saying there are no allPosts
           return const Center(
             child:
-                Padding(padding: EdgeInsets.all(25), child: Text("no posts")),
+            Padding(padding: EdgeInsets.all(25), child: Text("no allPosts")),
           );
         }
-        // Display the posts using a ListView.builder
+        // Display the allPosts using a ListView.builder
         return Expanded(
           child: RefreshIndicator.adaptive(
             onRefresh: _pullRefresh,
             child: ListView.builder(
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-              itemCount: snapshot.data!.docs.length,
+              itemCount: widget.searchController.text.isEmpty
+                  ? allPosts.length
+                  : filterPosts(allPosts, widget.searchController.text).length,
               itemBuilder: (context, index) {
-                final postSnapshot = posts[index];
+                final filteredPosts = filterPosts(allPosts, widget.searchController.text);
+                final postSnapshot = widget.searchController.text.isEmpty
+                    ? allPosts[index]
+                    : filteredPosts[index];
                 //Post card
                 return SocialMediaPost(
                   message: postSnapshot['message'],
@@ -60,6 +62,14 @@ class _PostStream extends State<PostStream> {
       }
     );
   }
+
+  List<DocumentSnapshot> filterPosts(List<DocumentSnapshot> allPosts, String searchQuery) {
+    return allPosts.where((postSnapshot) {
+      final message = postSnapshot['message'].toString().toLowerCase();
+      return message.contains(searchQuery.toLowerCase());
+    }).toList();
+  }
+
   Future<void> _pullRefresh() async {
     List<String> freshNumbers = await NumberGenerator().slowNumbers();
     setState(() {
@@ -77,7 +87,7 @@ class _PostStream extends State<PostStream> {
 // pull-to-refresh code
 class NumberGenerator {
   Future<List<String>> slowNumbers() async {
-    return Future.delayed(const Duration(milliseconds: 1000), () => numbers,);
+    return Future.delayed(const Duration(milliseconds: 500), () => numbers,);
   }
 
   List<String> get numbers => List.generate(5, (index) => number);
