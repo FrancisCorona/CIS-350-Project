@@ -92,9 +92,6 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
-          Container(
-            child: PostStream(selectedFilter: selectedFilter, searchController: _searchController),
-          )
         ],
       ),
     );
