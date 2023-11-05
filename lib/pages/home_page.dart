@@ -45,7 +45,7 @@ class HomePage extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Expanded(
-                  child: SearchBox(searchController: _searchController),
+                  child: SearchBox(searchController: _searchController, onSubmitted: _triggerRefresh),
                 ),
                 const SizedBox(width: 10),
                 Container(
@@ -101,5 +101,10 @@ class HomePage extends State<Home> {
         ),
       ),
     );
+  }
+
+  void _triggerRefresh() {
+    // Call setState to trigger the rebuild of the PostStream widget
+    setState(() {});
   }
 }

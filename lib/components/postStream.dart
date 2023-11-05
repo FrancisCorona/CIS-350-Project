@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'database.dart';
 import 'postObject.dart';
-import 'search_box.dart';
 
 class PostStream extends StatefulWidget {
   final String selectedFilter;
@@ -26,11 +25,6 @@ class _PostStream extends State<PostStream> {
       stream: server.getPosts(widget.selectedFilter),
       builder: (context, snapshot) {
         //show a loading circle
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
         final allPosts = snapshot.data!.docs;
         if (snapshot.data == null || allPosts.isEmpty) {
           //in case the database is empty, have a message saying there are no allPosts
@@ -40,7 +34,6 @@ class _PostStream extends State<PostStream> {
           );
         }
         // Display the allPosts using a ListView.builder
-
         return Expanded(
           child: RefreshIndicator.adaptive(
             onRefresh: _pullRefresh,
@@ -94,7 +87,7 @@ class _PostStream extends State<PostStream> {
 // pull-to-refresh code
 class NumberGenerator {
   Future<List<String>> slowNumbers() async {
-    return Future.delayed(const Duration(milliseconds: 1000), () => numbers,);
+    return Future.delayed(const Duration(milliseconds: 500), () => numbers,);
   }
 
   List<String> get numbers => List.generate(5, (index) => number);
