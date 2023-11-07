@@ -40,7 +40,8 @@ class _PostPageState extends State<PostPage> {
 
   // Function to build and return the main content of the page.
   Widget buildPostContent() {
-    return Center(
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

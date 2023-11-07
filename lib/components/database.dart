@@ -43,7 +43,8 @@ class DataBase {
       "likes": 0,
       "message": message,
       "reportCount": 0,
-      "timeStamp": Timestamp.now()
+      "timeStamp": Timestamp.now(),
+      "tag": '',
     };
     final post = FirebaseFirestore.instance.collection('posts').add(data);
     return post;
