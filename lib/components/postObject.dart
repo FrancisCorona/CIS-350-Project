@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'like_button.dart';
 import 'like_manager.dart';
+import 'dislike_button.dart';
 import 'comment_button.dart';
 
 class SocialMediaPost extends StatefulWidget {
@@ -46,7 +47,7 @@ class SocialMediaPost extends StatefulWidget {
 
 class _SocialMediaPostState extends State<SocialMediaPost> {
   bool isLiked = false;
-
+  bool isdisLiked = false;
   String getMessage() {
     return widget.message;
   }
@@ -55,6 +56,7 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
   void initState() {
     super.initState();
     _loadLikedState();
+    _loaddisLikedState();
   }
 
   Future<void> _loadLikedState() async {
@@ -64,15 +66,39 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
     });
   }
 
+  Future<void> _loaddisLikedState() async {
+    final isSelected = await LikeManager.isDisLiked(widget.postID);
+    setState(() {
+      isdisLiked = isSelected;
+    });
+  }
+
   Future<void> toggleLike() async {
     setState(() {
       isLiked = !isLiked;
+      if (isLiked) {
+        isdisLiked = false;
+      }
     });
 
     if (isLiked) {
       await LikeManager.likePost(widget.postID);
     } else {
       await LikeManager.unlikePost(widget.postID);
+    }
+  }
+
+  Future<void> toggledisLike() async {
+    setState(() {
+      isdisLiked = !isdisLiked;
+      if (isdisLiked) {
+        isLiked = false;
+      }
+    });
+    if (isdisLiked) {
+      await LikeManager.disLikePost(widget.postID);
+    } else {
+      await LikeManager.removedisLike(widget.postID);
     }
   }
 
@@ -144,7 +170,15 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                     onTap: () {
                       toggleLike();
                     },
-                  )
+                  ),
+                  Container(
+                    child: DisLikeButton(
+                      isSelected: isdisLiked,
+                      onTap: () {
+                        toggledisLike();
+                      },
+                    ),
+                  ),
                 ],
               ),
             ],
