@@ -32,7 +32,7 @@ class PostTag extends StatelessWidget {
         ),
       );
     }  else {
-      return Spacer();
+      return const Spacer();
     }
   }
 }
