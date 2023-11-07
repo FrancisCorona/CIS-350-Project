@@ -49,7 +49,7 @@ class _CommentPageState extends State<CommentPage> {
   // Function to build and return the main content of the page.
   Widget buildCommentContent() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget> [
         StreamBuilder(
           stream: server.getComments(widget.postObject.postID),
