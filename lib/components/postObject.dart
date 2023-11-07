@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'like_button.dart';
 import 'like_manager.dart';
+import 'comment_button.dart';
 
 class SocialMediaPost extends StatefulWidget {
   final String postID;
@@ -20,10 +21,35 @@ class SocialMediaPost extends StatefulWidget {
 
   @override
   State<SocialMediaPost> createState() => _SocialMediaPostState();
+
+  String formatTimeAgo(DateTime time) {
+    final now = DateTime.now();
+    final difference = time.isBefore(now) ? now.difference(time) : Duration();
+
+    if (difference.inSeconds < 60) {
+      return 'Posted now';
+    } else if (difference.inMinutes < 60) {
+      return 'Posted ${difference.inMinutes}m ago';
+    } else if (difference.inHours < 24) {
+      final hours = difference.inHours;
+      final remainingMinutes = difference.inMinutes % 60;
+      final hoursDecimal = hours + (remainingMinutes / 60);
+      return 'Posted ${hoursDecimal.toStringAsFixed(1)}h ago';
+    } else {
+      final days = difference.inDays;
+      final remainingHours = difference.inHours % 24;
+      final daysDecimal = days + (remainingHours / 24);
+      return 'Posted ${daysDecimal.toStringAsFixed(1)}d ago';
+    }
+  }
 }
 
 class _SocialMediaPostState extends State<SocialMediaPost> {
   bool isLiked = false;
+
+  String getMessage() {
+    return widget.message;
+  }
 
   @override
   void initState() {
@@ -73,7 +99,7 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                formatTimeAgo(widget.timeStamp),
+                widget.formatTimeAgo(widget.timeStamp),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
@@ -101,19 +127,7 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Comments
-              const Row(children: [
-                Icon(
-                  Icons.chat_bubble,
-                  color: Colors.grey,
-                  size: 18.0,
-                ),
-                SizedBox(width: 5),
-                Text("Comments",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey,
-                    ))
-              ]),
+              CommentButton(postObject: widget),
               // Like heart
               Row(
                 children: [
@@ -138,26 +152,5 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
         ],
       ),
     );
-  }
-
-  String formatTimeAgo(DateTime time) {
-    final now = DateTime.now();
-    final difference = time.isBefore(now) ? now.difference(time) : Duration();
-
-    if (difference.inSeconds < 60) {
-      return 'Posted now';
-    } else if (difference.inMinutes < 60) {
-      return 'Posted ${difference.inMinutes}m ago';
-    } else if (difference.inHours < 24) {
-      final hours = difference.inHours;
-      final remainingMinutes = difference.inMinutes % 60;
-      final hoursDecimal = hours + (remainingMinutes / 60);
-      return 'Posted ${hoursDecimal.toStringAsFixed(1)}h ago';
-    } else {
-      final days = difference.inDays;
-      final remainingHours = difference.inHours % 24;
-      final daysDecimal = days + (remainingHours / 24);
-      return 'Posted ${daysDecimal.toStringAsFixed(1)}d ago';
-    }
   }
 }
