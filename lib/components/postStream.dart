@@ -25,6 +25,11 @@ class _PostStream extends State<PostStream> {
       stream: server.getPosts(widget.selectedFilter),
       builder: (context, snapshot) {
         //show a loading circle
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         final allPosts = snapshot.data!.docs;
         if (snapshot.data == null || allPosts.isEmpty) {
           //in case the database is empty, have a message saying there are no allPosts
