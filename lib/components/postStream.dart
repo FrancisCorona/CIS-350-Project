@@ -52,6 +52,7 @@ class _PostStream extends State<PostStream> {
                     likes: postSnapshot['likes'],
                     reportCount: postSnapshot['reportCount'],
                     postID: postSnapshot.id,
+                    tag: postSnapshot['tag'],
                 );
               },
             ),

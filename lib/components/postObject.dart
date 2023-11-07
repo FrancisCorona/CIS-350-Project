@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'like_button.dart';
 import 'like_manager.dart';
 import 'dislike_button.dart';
+import 'postTag.dart';
 
 class SocialMediaPost extends StatefulWidget {
   final String postID;
@@ -9,6 +10,7 @@ class SocialMediaPost extends StatefulWidget {
   final DateTime timeStamp;
   final int likes;
   final int reportCount;
+  final String tag;
 
   const SocialMediaPost(
       {Key? key,
@@ -16,7 +18,8 @@ class SocialMediaPost extends StatefulWidget {
       required this.timeStamp,
       required this.likes,
       required this.reportCount,
-      required this.postID})
+      required this.postID,
+      required this.tag})
       : super(key: key);
 
   @override
@@ -71,7 +74,7 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
                 formatTimeAgo(widget.timeStamp),
@@ -80,6 +83,8 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                   color: Colors.grey,
                 ),
               ),
+              PostTag(tag: widget.tag),
+              Spacer(),
               const Icon(
                 Icons.flag,
                 color: Colors.grey,
