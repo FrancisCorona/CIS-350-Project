@@ -10,8 +10,8 @@ class DisLikeButton extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: Icon(
-          Icons.thumb_down,
-          color: isSelected ? Colors.white : Colors.grey,
+          Icons.arrow_downward,
+          color: isSelected ? Colors.red : Colors.grey,
         ));
   }
 }

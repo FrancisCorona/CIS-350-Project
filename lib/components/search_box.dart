@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 
 class SearchBox extends StatefulWidget {
-  const SearchBox({Key? key}) : super(key: key);
+  final TextEditingController searchController;
+  final VoidCallback onSubmitted;
+
+  const SearchBox({Key? key, required this.searchController, required this.onSubmitted}) : super(key: key);
 
   @override
   State<SearchBox> createState() => _SearchBoxState();
 }
 
 class _SearchBoxState extends State<SearchBox> {
-  final _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextField(
+        textInputAction: TextInputAction.go,
         textAlignVertical: TextAlignVertical.center,
-        controller: _searchController,
+        controller: widget.searchController,
+        onSubmitted: (_) {
+          widget.onSubmitted();
+        },
         decoration: InputDecoration(
             isCollapsed: true,
             filled: true,
@@ -36,7 +42,8 @@ class _SearchBoxState extends State<SearchBox> {
             suffixIcon: IconButton(
               icon: const Icon(Icons.clear),
               onPressed: () {
-                _searchController.clear();
+                widget.searchController.clear();
+                widget.onSubmitted();
               },
             )),
       ),

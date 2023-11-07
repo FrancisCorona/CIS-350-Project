@@ -14,10 +14,11 @@ class HomePage extends StatefulWidget {
 
 // Define the state class for HomePage
 class _HomePageState extends State<HomePage> {
+  final _searchController = TextEditingController();
   String postContents = "null"; // Initialize postContents with null
   String selectedFilter = 'Recent'; // Initialize the selected filter
 
-final server = DataBase.getInstance(); // Create instance of DataBase class
+  final server = DataBase.getInstance(); // Create instance of DataBase class
 
   // Define a function to handle filter changes
   void onFilterChanged(String newFilter) {
@@ -62,7 +63,7 @@ final server = DataBase.getInstance(); // Create instance of DataBase class
       children: [
         buildSearchBoxAndFilterDropDownMenu(),
         Container(
-          child: PostStream(selectedFilter: selectedFilter),
+          child: PostStream(selectedFilter: selectedFilter, searchController: _searchController),
         ),
       ],
     );
@@ -78,7 +79,7 @@ final server = DataBase.getInstance(); // Create instance of DataBase class
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Expanded(
-            child: SearchBox(),
+            child: SearchBox(searchController: _searchController, onSubmitted: _triggerRefresh),
           ),
           const SizedBox(width: 10),
           Container(
@@ -135,5 +136,10 @@ ElevatedButton buildElevatedButton() {
       // Display New Post as the buttons text
       child: Text("New Post"),
     );
+  }
+
+  void _triggerRefresh() {
+    // Call setState to trigger the rebuild of the PostStream widget
+    setState(() {});
   }
 }
