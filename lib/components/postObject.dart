@@ -131,11 +131,6 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                   color: Colors.grey,
                 ),
               ),
-              const Icon(
-                Icons.flag,
-                color: Colors.grey,
-                size: 20,
-              )
             ],
           ),
           // Message Contents
