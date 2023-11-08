@@ -92,4 +92,5 @@ class DataBase {
   CollectionReference getPostCollection() {
     return posts;
   }
+  reportPost(String postID) {}
 }
