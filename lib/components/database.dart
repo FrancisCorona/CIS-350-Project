@@ -56,7 +56,6 @@ class DataBase {
     return querySnapshot.size;
   }
 
-
   //create post
   Future<DocumentReference<Map<String, dynamic>>> createPost(String message) {
     final data = {
@@ -69,20 +68,30 @@ class DataBase {
     return post;
   }
 
+  // Add the reportPost method
+  Future<void> reportPost(String postID) async {
+    await posts.doc(postID).update({'reported': true});
+  }
+
 //add like to a post
   Future<void> addLike(String id) {
     return posts.doc(id).update({'likes': FieldValue.increment(1)});
-  }
-
-//increment the reportCount for a post by 1
-  Future<void> report(String id) {
-    return posts.doc(id).update({'reportCount': FieldValue.increment(1)});
   }
 
 //remove a like from a post
   Future<void> removeLike(String id) {
     return posts.doc(id).update({'likes': FieldValue.increment(-1)});
   }
+
+  //Add report to a post
+  Future<void> report(String id) {
+    return posts.doc(id).update({'reportCount': FieldValue.increment(1)});
+  }
+
+  //remove a report from a post
+  Future<void> removereport(String id) {
+    return posts.doc(id).update({'reportCount': FieldValue.increment(-1)});
+}
 
   void addComment(String id, String commentText) {
     posts.doc(id).collection("Comments").add({"commentText" : commentText, "commentTime" : Timestamp.now()});
@@ -92,5 +101,5 @@ class DataBase {
   CollectionReference getPostCollection() {
     return posts;
   }
-  reportPost(String postID) {}
+  
 }
