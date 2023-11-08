@@ -13,7 +13,7 @@ class SocialMediaPost extends StatefulWidget {
   final int likes;
   int reportCount;
 
-   SocialMediaPost(
+  SocialMediaPost(
       {Key? key,
       required this.message,
       required this.timeStamp,
@@ -60,6 +60,7 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
     super.initState();
     _loadLikedState();
     _loaddisLikedState();
+    _loaddisreportedState();
   }
 
   Future<void> _loadLikedState() async {
@@ -105,6 +106,13 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
     }
   }
 
+  Future<void> _loaddisreportedState() async {
+    final reported = await ReportManager.isReported(widget.postID);
+    setState(() {
+      isReported = reported;
+    });
+  }
+
   Future<void> toggleReport() async {
     if (!isReported) {
       await ReportManager.reportPost(widget.postID);
@@ -138,7 +146,7 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
         ],
       ),
       //Stack to overlay flag button
-      child: Stack( 
+      child: Stack(
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +165,8 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
               ),
               // Message Contents
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
                 child: Text(
                   widget.message,
                   style: const TextStyle(
@@ -200,7 +209,7 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
             ],
           ),
           // Position the flag button
-          Positioned( 
+          Positioned(
             top: 1,
             right: 1,
             child: Container(
