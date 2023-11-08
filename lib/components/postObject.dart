@@ -3,6 +3,7 @@ import 'like_button.dart';
 import 'like_manager.dart';
 import 'dislike_button.dart';
 import 'comment_button.dart';
+import 'report_button.dart';
 
 class SocialMediaPost extends StatefulWidget {
   final String postID;
@@ -48,6 +49,7 @@ class SocialMediaPost extends StatefulWidget {
 class _SocialMediaPostState extends State<SocialMediaPost> {
   bool isLiked = false;
   bool isdisLiked = false;
+  bool isReported = false;
   String getMessage() {
     return widget.message;
   }
@@ -102,6 +104,19 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
     }
   }
 
+  Future<void> toggleReport() async {
+    setState(() {
+      isReported = !isReported;
+    });
+
+    if (isReported) {
+    //  await ReportManager.reportPost(widget.postID);
+    } else {
+    //  await ReportManager.unreportPost(widget.postID);
+  }
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -118,66 +133,82 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
           )
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack( // Use a Stack to overlay the flag button
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.formatTimeAgo(widget.timeStamp),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-          // Message Contents
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-            child: Text(
-              widget.message,
-              style: const TextStyle(
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ),
-          // Comment footer: Comments and Likes
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Comments
-              CommentButton(postObject: widget),
-              // Like heart
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.likes.toString(),
+                    widget.formatTimeAgo(widget.timeStamp),
                     style: const TextStyle(
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.bold,
                       color: Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(width: 1),
-                  LikeButton(
-                    isLiked: isLiked,
-                    onTap: () {
-                      toggleLike();
-                    },
-                  ),
-                  Container(
-                    child: DisLikeButton(
-                      isSelected: isdisLiked,
-                      onTap: () {
-                        toggledisLike();
-                      },
                     ),
                   ),
                 ],
               ),
+              // Message Contents
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                child: Text(
+                  widget.message,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+              // Comment footer: Comments and Likes
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Comments
+                  CommentButton(postObject: widget),
+                  // Like heart
+                  Row(
+                    children: [
+                      Text(
+                        widget.likes.toString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      const SizedBox(width: 1),
+                      LikeButton(
+                        isLiked: isLiked,
+                        onTap: () {
+                          toggleLike();
+                        },
+                      ),
+                      Container(
+                        child: DisLikeButton(
+                          isSelected: isdisLiked,
+                          onTap: () {
+                            toggledisLike();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ],
-          )
+          ),
+          Positioned( // Position the flag button in the top right corner
+            top: 2, // Adjust the top value as needed
+            right: 2, // Adjust the right value as needed
+            child: Container(
+              child: ReportButton(
+                isReported: isReported,
+                onTap: () {
+                  toggleReport();
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );
