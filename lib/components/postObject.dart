@@ -104,19 +104,6 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
     }
   }
 
-  Future<void> toggleReport() async {
-    setState(() {
-      isReported = !isReported;
-    });
-
-    if (isReported) {
-    //  await ReportManager.reportPost(widget.postID);
-    } else {
-    //  await ReportManager.unreportPost(widget.postID);
-  }
-}
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -133,82 +120,74 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
           )
         ],
       ),
-      child: Stack( // Use a Stack to overlay the flag button
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Text(
+                widget.formatTimeAgo(widget.timeStamp),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+          // Message Contents
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+            child: Text(
+              widget.message,
+              style: const TextStyle(
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ),
+          // Comment footer: Comments and Likes
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Comments
+              CommentButton(postObject: widget),
+              // Like heart
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.formatTimeAgo(widget.timeStamp),
+                    widget.likes.toString(),
                     style: const TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                       color: Colors.grey,
+                    ),
+                  ),
+                  const SizedBox(width: 1),
+                  LikeButton(
+                    isLiked: isLiked,
+                    onTap: () {
+                      toggleLike();
+                    },
+                  ),
+                  Container(
+                    child: DisLikeButton(
+                      isSelected: isdisLiked,
+                      onTap: () {
+                        toggledisLike();
+                      },
+                    ),
+                  ),
+                  Container(
+                    child: ReportButton(
+                      isReported: isReported,
+                      onTap: () {
+                        toggleReport();
+                      },
                     ),
                   ),
                 ],
               ),
-              // Message Contents
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-                child: Text(
-                  widget.message,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ),
-              // Comment footer: Comments and Likes
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Comments
-                  CommentButton(postObject: widget),
-                  // Like heart
-                  Row(
-                    children: [
-                      Text(
-                        widget.likes.toString(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      const SizedBox(width: 1),
-                      LikeButton(
-                        isLiked: isLiked,
-                        onTap: () {
-                          toggleLike();
-                        },
-                      ),
-                      Container(
-                        child: DisLikeButton(
-                          isSelected: isdisLiked,
-                          onTap: () {
-                            toggledisLike();
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ],
-          ),
-          Positioned( // Position the flag button in the top right corner
-            top: 2, // Adjust the top value as needed
-            right: 2, // Adjust the right value as needed
-            child: Container(
-              child: ReportButton(
-                isReported: isReported,
-                onTap: () {
-                  toggleReport();
-                },
-              ),
-            ),
-          ),
+          )
         ],
       ),
     );
