@@ -4,6 +4,7 @@ import 'like_manager.dart';
 import 'dislike_button.dart';
 import 'postTag.dart';
 import 'comment_button.dart';
+import 'getAIData.dart';
 
 class SocialMediaPost extends StatefulWidget {
   final String postID;

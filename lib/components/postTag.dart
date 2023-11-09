@@ -24,10 +24,10 @@ class PostTag extends StatelessWidget {
             tag,
             softWrap: false,
             overflow: TextOverflow.clip,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Colors.black54,
-            ),
+            // style: const TextStyle(
+            //   fontWeight: FontWeight.w600,
+            //   color: Colors.black54,
+            // ),
           ),
         ),
       );
