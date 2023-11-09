@@ -114,18 +114,13 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
   }
 
   Future<void> toggleReport() async {
-    if (!isReported) {
+    setState(() {
+      isReported = !isReported;
+    });
+    if (isReported) {
       await ReportManager.reportPost(widget.postID);
-      setState(() {
-        isReported = true;
-        widget.reportCount += 1; // Increment report count
-      });
     } else {
       await ReportManager.unreportPost(widget.postID);
-      setState(() {
-        isReported = false;
-        widget.reportCount -= 1; // Decrement report count
-      });
     }
   }
 

@@ -68,11 +68,6 @@ class DataBase {
     return post;
   }
 
-  // Add the reportPost method
-  Future<void> reportPost(String postID) async {
-    await posts.doc(postID).update({'reported': true});
-  }
-
 //add like to a post
   Future<void> addLike(String id) {
     return posts.doc(id).update({'likes': FieldValue.increment(1)});
@@ -89,7 +84,7 @@ class DataBase {
   }
 
   //remove a report from a post
-  Future<void> removereport(String id) {
+  Future<void> removeReport(String id) {
     return posts.doc(id).update({'reportCount': FieldValue.increment(-1)});
 }
 
