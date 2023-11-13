@@ -162,11 +162,12 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                   ),
                   PostTag(tag: widget.tag),
                   Spacer(),
-                  const Icon(
-                    Icons.flag,
-                    color: Colors.grey,
-                    size: 20,
-                  )
+                  ReportButton(
+                    isReported: isReported,
+                    onTap: () {
+                      toggleReport();
+                    },
+                  ),
                 ],
               ),
               // Message Contents
@@ -213,19 +214,6 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                 ],
               ),
             ],
-          ),
-          // Position the flag button
-          Positioned(
-            top: 1,
-            right: 1,
-            child: Container(
-              child: ReportButton(
-                isReported: isReported,
-                onTap: () {
-                  toggleReport();
-                },
-              ),
-            ),
           ),
         ],
       ),
