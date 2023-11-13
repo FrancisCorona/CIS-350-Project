@@ -6,7 +6,6 @@ import 'postTag.dart';
 import 'comment_button.dart';
 import 'report_button.dart';
 import 'report_manager.dart';
-import 'getAIData.dart';
 
 class SocialMediaPost extends StatefulWidget {
   final String postID;
@@ -201,13 +200,11 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                           toggleLike();
                         },
                       ),
-                      Container(
-                        child: DisLikeButton(
-                          isSelected: isdisLiked,
-                          onTap: () {
-                            toggledisLike();
-                          },
-                        ),
+                      DisLikeButton(
+                        isSelected: isdisLiked,
+                        onTap: () {
+                          toggledisLike();
+                        },
                       ),
                     ],
                   ),
