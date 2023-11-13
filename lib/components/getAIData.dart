@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:lakervent/api_key.dart';
 import 'package:http/http.dart' as http;
 
 Future<String> query(String postMessage) async {
-  var apiKey = 'API_KEY';
+  var apiKey = googleApiKey;
 
   final url = Uri.parse(
       'https://generativelanguage.googleapis.com/v1beta2/models/chat-bison-001:generateMessage?key=$apiKey');
