@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<String> query(String postMessage) async {
-  var apiKey = 'AIzaSyATIGAg6qjFFjO_XyW5O_F6wdY1pqf64eo';
+  var apiKey = 'API_KEY';
 
   final url = Uri.parse(
       'https://generativelanguage.googleapis.com/v1beta2/models/chat-bison-001:generateMessage?key=$apiKey');
@@ -47,7 +47,7 @@ Future<String> query(String postMessage) async {
 
       return cleanString;
     } else {
-      return 'Request failed with status: ${response.statusCode}.\n\n${response.body}';
+      throw 'Request failed with status ${response.statusCode}.\n${response.body}';
     }
   } catch (error) {
     throw Exception('Error sending POST request: $error');
