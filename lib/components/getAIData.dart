@@ -2,70 +2,54 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const API_URL = "https://api-inference.huggingface.co/models/michellejieli/emotion_text_classifier";
-const API_KEY = "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";
+Future<String> query(String postMessage) async {
+  var apiKey = 'AIzaSyATIGAg6qjFFjO_XyW5O_F6wdY1pqf64eo';
 
-Future<List<List<Map<String, dynamic>>>> query(Map<String, dynamic> payload) async {
-  final response = await http.post(
-    Uri.parse(API_URL),
-    headers: {
-      'Authorization': 'Bearer $API_KEY',
-      'Content-Type': 'application/json',
+  final url = Uri.parse(
+      'https://generativelanguage.googleapis.com/v1beta2/models/chat-bison-001:generateMessage?key=$apiKey');
+  final headers = {'Content-Type': 'application/json'};
+  final body = jsonEncode({
+    "prompt": {
+      "context": "You are an awesome summarizer, but can only use one word.",
+      "examples": [
+        {
+          "input": {"content": "Ugh, parking at GVSU is a never-ending nightmare! Spent 30 minutes circling for a spot today."},
+          "output": {"content": "Parking"}
+        },
+        {
+          "input": {"content": "Does anyone else find Mackinac confusing as heck? Got lost AGAIN today."},
+          "output": {"content": "Mackinac"}
+        },
+        {
+          "input": {"content": "The dining hall food is terrible! We need better food options on campus."},
+          "output": {"content": "Food"}
+        }
+      ],
+      "messages": [
+        {"content": "Generate one word to label the following text and do not use punctuation: $postMessage"}
+      ]
     },
-    body: jsonEncode(payload),
-  );
+    "temperature": 1,
+  });
 
-  if (response.statusCode == 200) {
-    final jsonResponse = jsonDecode(response.body);
-    if (jsonResponse is List<dynamic> && jsonResponse.isNotEmpty) {
-      return [jsonResponse[0].cast<Map<String, dynamic>>()];
-    } else {
-      throw Exception('Invalid response format');
-    }
-  } else {
-    throw Exception('Failed to query the API: ${response.statusCode}');
-  }
-}
-
-Future<String?> fetchTag(String message) async {
   try {
-    final response = await query({
-      "inputs": message,
-    });
+    final response = await http.post(url, headers: headers, body: body);
+    if (response.statusCode == 200) {
+      final decodedResponse = json.decode(response.body);
+      final string =  decodedResponse['candidates'][0]['content'];
 
-    if (response.isNotEmpty) {
-      final firstLabel = response[0][0]['label'] as String;
-      return emotionToEmoji[firstLabel];
+      String cleanString = string.replaceAllMapped(
+        RegExp(r'[^A-Za-z-]'), // This regex cleans up AI output, removing unwanted characters
+            (match) {
+          return ''; // Replace each non-matching character with an empty string
+        },
+      );
+
+      return cleanString;
     } else {
-      throw Exception("Error: Empty API response on firstResponse");
+      return 'Request failed with status: ${response.statusCode}.\n\n${response.body}';
     }
-  } catch (e) {
-    print("first request failed, trying again");
-    await Future.delayed(const Duration(milliseconds: 1000)); // Add a 100ms delay to avoid spamming the api
-    try {
-      final secondResponse = await query({
-        "inputs": message,
-      });
-
-      if (secondResponse.isNotEmpty) {
-        final secondLabel =  secondResponse[0][0]['label'] as String;
-        return emotionToEmoji[secondLabel];
-      } else {
-        throw Exception("Error: Empty API response on secondResponse");
-      }
-    } catch (secondException) {
-      // Handle the error for the second query
-      throw Exception("Error2: $secondException");
-    }
+  } catch (error) {
+    throw Exception('Error sending POST request: $error');
   }
 }
-
-Map<String, String> emotionToEmoji = {
-  'anger': '😡 angry',
-  'disgust': '🤢 disgusted',
-  'fear': '😨 fearful',
-  'joy': '😄 joyful',
-  'neutral': '😐 neutral',
-  'sadness': '😢 sad',
-  'surprise': '😲 surprised',
-};

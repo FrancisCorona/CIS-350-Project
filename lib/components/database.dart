@@ -71,7 +71,7 @@ class DataBase {
     final post = await FirebaseFirestore.instance.collection('posts').add(data);
 
     // Fetch the tag and update the post in the database with the generated tag
-    final tag = await fetchTag(message);
+    final tag = await query(message);
     post.update({'tag': tag});
 
     return post;
