@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'getAIData.dart';
 
 //implement the Singleton design pattern
 class DataBase {
@@ -57,14 +58,20 @@ class DataBase {
   }
 
   //create post
-  Future<DocumentReference<Map<String, dynamic>>> createPost(String message) {
+  Future<DocumentReference<Map<String, dynamic>>> createPost(String message) async {
     final data = {
       "likes": 0,
       "message": message,
       "reportCount": 0,
-      "timeStamp": Timestamp.now()
+      "timeStamp": Timestamp.now(),
+      "tag": '',
     };
-    final post = FirebaseFirestore.instance.collection('posts').add(data);
+    final post = await FirebaseFirestore.instance.collection('posts').add(data);
+
+    // Fetch the tag and update the post in the database with the generated tag
+    final tag = await query(message);
+    post.update({'tag': tag});
+
     return post;
   }
 

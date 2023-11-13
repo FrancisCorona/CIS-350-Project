@@ -2,24 +2,28 @@ import 'package:flutter/material.dart';
 import 'like_button.dart';
 import 'like_manager.dart';
 import 'dislike_button.dart';
+import 'postTag.dart';
 import 'comment_button.dart';
 import 'report_button.dart';
 import 'report_manager.dart';
+import 'getAIData.dart';
 
 class SocialMediaPost extends StatefulWidget {
   final String postID;
   final String message;
   final DateTime timeStamp;
   final int likes;
-  int reportCount;
+  final int reportCount;
+  final String tag;
 
-  SocialMediaPost(
+  const SocialMediaPost(
       {Key? key,
       required this.message,
       required this.timeStamp,
       required this.likes,
       required this.reportCount,
-      required this.postID})
+      required this.postID,
+      required this.tag})
       : super(key: key);
 
   @override
@@ -156,6 +160,13 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
                       color: Colors.grey,
                     ),
                   ),
+                  PostTag(tag: widget.tag),
+                  Spacer(),
+                  const Icon(
+                    Icons.flag,
+                    color: Colors.grey,
+                    size: 20,
+                  )
                 ],
               ),
               // Message Contents

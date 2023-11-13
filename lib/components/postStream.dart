@@ -54,11 +54,12 @@ class _PostStream extends State<PostStream> {
                     : filteredPosts[index];
                 //Post card
                 return SocialMediaPost(
-                  message: postSnapshot['message'],
-                  timeStamp: postSnapshot['timeStamp'].toDate(),
-                  likes: postSnapshot['likes'],
-                  reportCount: postSnapshot['reportCount'],
-                  postID: postSnapshot.id,
+                    message: postSnapshot['message'],
+                    timeStamp: postSnapshot['timeStamp'].toDate(),
+                    likes: postSnapshot['likes'],
+                    reportCount: postSnapshot['reportCount'],
+                    postID: postSnapshot.id,
+                    tag: postSnapshot['tag'],
                 );
               },
             ),
@@ -70,8 +71,10 @@ class _PostStream extends State<PostStream> {
 
   List<DocumentSnapshot> filterPosts(List<DocumentSnapshot> allPosts, String searchQuery) {
     return allPosts.where((postSnapshot) {
-      final message = postSnapshot['message'].toString().toLowerCase();
-      return message.contains(searchQuery.toLowerCase());
+      final message = postSnapshot['message'].toString().toLowerCase(); // Searches message field
+      final tag = postSnapshot['tag'].toString().toLowerCase(); // Searches tag field
+
+      return message.contains(searchQuery.toLowerCase()) || tag.contains(searchQuery.toLowerCase());
     }).toList();
   }
 
