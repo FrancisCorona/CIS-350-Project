@@ -61,22 +61,22 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
   @override
   void initState() {
     super.initState();
-    _loadLikedState();
-    _loaddisLikedState();
-    _loaddisreportedState();
+    _loadInitialStates();
   }
 
-  Future<void> _loadLikedState() async {
-    final liked = await LikeManager.isLiked(widget.postID);
+  Future<void> _loadInitialStates() async {
+    final likedFuture = LikeManager.isLiked(widget.postID);
+    final disLikedFuture = LikeManager.isDisLiked(widget.postID);
+    final reportedFuture = ReportManager.isReported(widget.postID);
+
+    final liked = await likedFuture;
+    final disLiked = await disLikedFuture;
+    final reported = await reportedFuture;
+
     setState(() {
       isLiked = liked;
-    });
-  }
-
-  Future<void> _loaddisLikedState() async {
-    final isSelected = await LikeManager.isDisLiked(widget.postID);
-    setState(() {
-      isdisLiked = isSelected;
+      isdisLiked = disLiked;
+      isReported = reported;
     });
   }
 
@@ -107,13 +107,6 @@ class _SocialMediaPostState extends State<SocialMediaPost> {
     } else {
       await LikeManager.removedisLike(widget.postID);
     }
-  }
-
-  Future<void> _loaddisreportedState() async {
-    final reported = await ReportManager.isReported(widget.postID);
-    setState(() {
-      isReported = reported;
-    });
   }
 
   Future<void> toggleReport() async {
