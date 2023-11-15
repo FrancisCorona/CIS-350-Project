@@ -122,6 +122,7 @@ ElevatedButton buildElevatedButton() {
 
         if (result != null && result.isNotEmpty) {
           server.createPost(result); // Access server instance here
+          _triggerRefresh(); // Rebuilds post stream after new post is created
         }
       },
       // Specifying size of button and text within the button.
