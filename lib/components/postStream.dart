@@ -84,12 +84,6 @@ class _PostStream extends State<PostStream> {
       numbersList = freshNumbers;
     });
   }
-
-  void updateFilter(String newFilter) {
-    setState(() {
-      selectedFilter = newFilter;
-    });
-  }
 }
 
 // pull-to-refresh code
