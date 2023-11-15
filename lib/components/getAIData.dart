@@ -46,7 +46,11 @@ Future<String> query(String postMessage) async {
         },
       );
 
-      return cleanString;
+      if (cleanString.isNotEmpty) {
+        return cleanString[0].toUpperCase() + cleanString.substring(1);
+      } else {
+        return cleanString;
+      }
     } else {
       throw 'Request failed with status ${response.statusCode}.\n${response.body}';
     }
