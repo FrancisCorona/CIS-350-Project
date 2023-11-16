@@ -24,9 +24,6 @@ class DataBase {
       query = query.orderBy('timeStamp', descending: true);
     } else if (selectedFilter == 'Oldest') {
       query = query.orderBy('timeStamp', descending: false);
-    } else if (selectedFilter == 'Hottest') {
-      // Need to implement hottest algorithm
-      query = query.orderBy('timeStamp', descending: true);
     } else if (selectedFilter == 'Most Liked') {
       query = query.orderBy('likes', descending: true);
     } else {

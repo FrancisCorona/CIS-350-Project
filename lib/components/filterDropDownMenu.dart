@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-final List<String> list = <String>['Recent', 'Oldest', 'Hottest', 'Most Liked'];
+final List<String> list = <String>['Recent', 'Oldest', 'Most Liked'];
 
 class FilterDropDownMenu extends StatefulWidget {
   final Function(String) onFilterChanged;
@@ -28,16 +28,15 @@ class _FilterDropDownMenuState extends State<FilterDropDownMenu> {
             widget.onFilterChanged(dropdownValue);
           },
           buttonStyleData: ButtonStyleData(
-            width: 135,
-            padding: const EdgeInsets.only(right:6),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: Colors.black12,
-              ),
-            )
-          ),
+              width: 135,
+              padding: const EdgeInsets.only(right: 6),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: Colors.black12,
+                ),
+              )),
           iconStyleData: const IconStyleData(
             icon: Icon(
               Icons.filter_list_alt,
@@ -46,21 +45,18 @@ class _FilterDropDownMenuState extends State<FilterDropDownMenu> {
             ),
           ),
           dropdownStyleData: DropdownStyleData(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-            )
-          ),
+              decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+          )),
           //Converts the list to a map with the key and value being the same
           items: list.map<DropdownMenuItem<String>>((value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Center(
-                child: Text(
-                  value,
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(0.6),
-                  )
-                ),
+                child: Text(value,
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.6),
+                    )),
               ),
             );
           }).toList(),
