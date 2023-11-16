@@ -8,7 +8,8 @@ import "../components/search_box.dart";
 // Define class HomePage that extends StatefulWidget
 class HomePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState(); // Create and return an instance of _HomePageState
+  _HomePageState createState() =>
+      _HomePageState(); // Create and return an instance of _HomePageState
 }
 
 // Define the state class for HomePage
@@ -62,7 +63,9 @@ class _HomePageState extends State<HomePage> {
       children: [
         buildSearchBoxAndFilterDropDownMenu(),
         Container(
-          child: PostStream(selectedFilter: selectedFilter, searchController: _searchController),
+          child: PostStream(
+              selectedFilter: selectedFilter,
+              searchController: _searchController),
         ),
       ],
     );
@@ -78,7 +81,9 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Expanded(
-            child: SearchBox(searchController: _searchController, onSubmitted: _triggerRefresh),
+            child: SearchBox(
+                searchController: _searchController,
+                onSubmitted: _triggerRefresh),
           ),
           const SizedBox(width: 10),
           Container(
@@ -109,7 +114,7 @@ class _HomePageState extends State<HomePage> {
   }
 
 // ElevatedButton for initiating the creation of a new post
-ElevatedButton buildElevatedButton() {
+  ElevatedButton buildElevatedButton() {
     return ElevatedButton(
       onPressed: () async {
         final result = await Navigator.push(

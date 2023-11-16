@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'getAIData.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 
 //implement the Singleton design pattern
 class DataBase {
   //Get a reference of the posts collection from the database
-  static final CollectionReference posts =
-      FirebaseFirestore.instance.collection('posts');
+  static dynamic posts = FirebaseFirestore.instance.collection('posts');
 
   static DataBase instance = DataBase._();
   //Make the constructor private
@@ -39,8 +39,7 @@ class DataBase {
   }
 
   Stream<QuerySnapshot> getComments(String id) {
-    return FirebaseFirestore.instance
-        .collection('posts')
+    return posts
         .doc(id)
         .collection("Comments")
         .orderBy("commentTime")
@@ -48,17 +47,14 @@ class DataBase {
   }
 
   Future<int> countComments(String id) async {
-    final querySnapshot = await FirebaseFirestore.instance
-        .collection("posts")
-        .doc(id)
-        .collection("Comments")
-        .get();
+    final querySnapshot = await posts.doc(id).collection("Comments").get();
 
     return querySnapshot.size;
   }
 
   //create post
-  Future<DocumentReference<Map<String, dynamic>>> createPost(String message) async {
+  Future<DocumentReference<Map<String, dynamic>>> createPost(
+      String message) async {
     final data = {
       "likes": 0,
       "message": message,
@@ -66,7 +62,7 @@ class DataBase {
       "timeStamp": Timestamp.now(),
       "tag": '',
     };
-    final post = await FirebaseFirestore.instance.collection('posts').add(data);
+    final post = await posts.add(data);
 
     // Fetch the tag and update the post in the database with the generated tag
     final tag = await query(message);
@@ -93,15 +89,27 @@ class DataBase {
   //remove a report from a post
   Future<void> removeReport(String id) {
     return posts.doc(id).update({'reportCount': FieldValue.increment(-1)});
-}
+  }
 
   void addComment(String id, String commentText) {
-    posts.doc(id).collection("Comments").add({"commentText" : commentText, "commentTime" : Timestamp.now()});
+    posts
+        .doc(id)
+        .collection("Comments")
+        .add({"commentText": commentText, "commentTime": Timestamp.now()});
   }
 
 //getter for the posts collection reference
   CollectionReference getPostCollection() {
     return posts;
   }
-  
+
+//provides a
+  void changeCollectionReference(refernce) {
+    //checks to make sure the refernce is either a CollectionReference of is a reference for testing
+    if (refernce is CollectionReference || refernce is FakeFirebaseFirestore) {
+      posts = refernce;
+    } else {
+      throw "Invalid Collection reference";
+    }
+  }
 }
