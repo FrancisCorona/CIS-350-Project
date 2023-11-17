@@ -106,4 +106,46 @@ void main() async {
     }
     expect(isSorted, true);
   });
+  test("Test getPosts method with 'Most Liked' paramenter", () async {
+    //fetch data
+    Stream<QuerySnapshot<Object?>> posts = server.getPosts('Most Liked');
+
+    //act
+    List<DocumentSnapshot> snapshots = [];
+    // Changes that data from a stream<QuerySnapshot> to List<DocumentSnapshot> and puts the data into snapshots
+    await for (QuerySnapshot<Object?> querySnapshot in posts) {
+      snapshots.addAll(querySnapshot.docs);
+      break;
+    }
+    bool isSorted = true;
+    //checks to see if the next post is after the current post
+    for (int index = 0; index < snapshots.length - 1; index++) {
+      if (snapshots[index]['likes'] < snapshots[index + 1]['likes']) {
+        isSorted = false;
+      }
+    }
+    expect(isSorted, true);
+  });
+  test("Test getPosts method with unknown paramenter", () async {
+    //fetch data
+    Stream<QuerySnapshot<Object?>> posts = server.getPosts('Least Liked');
+
+    //act
+    List<DocumentSnapshot> snapshots = [];
+    // Changes that data from a stream<QuerySnapshot> to List<DocumentSnapshot> and puts the data into snapshots
+    await for (QuerySnapshot<Object?> querySnapshot in posts) {
+      snapshots.addAll(querySnapshot.docs);
+      break;
+    }
+    bool isSorted = true;
+    //checks to see if the next post is before the current post
+    for (int index = 0; index < snapshots.length - 1; index++) {
+      DateTime currentPost = snapshots[index]['timeStamp'].toDate();
+      DateTime nextPost = snapshots[index + 1]['timeStamp'].toDate();
+      if (currentPost.isBefore(nextPost)) {
+        isSorted = false;
+      }
+    }
+    expect(isSorted, true);
+  });
 }
