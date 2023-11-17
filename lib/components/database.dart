@@ -19,7 +19,6 @@ class DataBase {
   Stream<QuerySnapshot> getPosts(String selectedFilter) {
     // Define a query reference
     Query query = posts;
-
     if (selectedFilter == 'Recent') {
       query = query.orderBy('timeStamp', descending: true);
     } else if (selectedFilter == 'Oldest') {
@@ -30,7 +29,6 @@ class DataBase {
       // Default if invalid filter gets selected somehow
       query = query.orderBy('timeStamp', descending: true);
     }
-
     // Return the stream of snapshots
     return query.snapshots();
   }
@@ -62,8 +60,8 @@ class DataBase {
     final post = await posts.add(data);
 
     // Fetch the tag and update the post in the database with the generated tag
-    final tag = await query(message);
-    post.update({'tag': tag});
+    // final tag = await query(message);
+    // post.update({'tag': tag});
 
     return post;
   }
@@ -100,7 +98,7 @@ class DataBase {
     return posts;
   }
 
-//provides a
+//provides a way to change the collection reference for testing
   void changeCollectionReference(refernce) {
     //checks to make sure the refernce is either a CollectionReference of is a reference for testing
     if (refernce is CollectionReference || refernce is FakeFirebaseFirestore) {
