@@ -60,30 +60,46 @@ class DataBase {
     final post = await posts.add(data);
 
     // Fetch the tag and update the post in the database with the generated tag
-    final tag = await query(message);
-    post.update({'tag': tag});
+    //  final tag = await query(message);
+    //post.update({'tag': tag});
 
     return post;
   }
 
 //add like to a post
   Future<void> addLike(String id) {
-    return posts.doc(id).update({'likes': FieldValue.increment(1)});
+    try {
+      return posts.doc(id).update({'likes': FieldValue.increment(1)});
+    } catch (error) {
+      throw Exception("Error document ID is not valid. $error");
+    }
   }
 
 //remove a like from a post
   Future<void> removeLike(String id) {
-    return posts.doc(id).update({'likes': FieldValue.increment(-1)});
+    try {
+      return posts.doc(id).update({'likes': FieldValue.increment(-1)});
+    } catch (error) {
+      throw Exception("Error document ID is not valid. $error");
+    }
   }
 
   //Add report to a post
   Future<void> report(String id) {
-    return posts.doc(id).update({'reportCount': FieldValue.increment(1)});
+    try {
+      return posts.doc(id).update({'reportCount': FieldValue.increment(1)});
+    } catch (error) {
+      throw Exception("Error document ID is not valid. $error");
+    }
   }
 
   //remove a report from a post
   Future<void> removeReport(String id) {
-    return posts.doc(id).update({'reportCount': FieldValue.increment(-1)});
+    try {
+      return posts.doc(id).update({'reportCount': FieldValue.increment(-1)});
+    } catch (error) {
+      throw Exception("Error document ID is not valid. $error");
+    }
   }
 
   void addComment(String id, String commentText) {
@@ -99,10 +115,11 @@ class DataBase {
   }
 
 //provides a way to change the collection reference for testing
-  void changeCollectionReference(refernce) {
+  void changeCollectionReference(reference) {
     //checks to make sure the refernce is either a CollectionReference of is a reference for testing
-    if (refernce is CollectionReference || refernce is FakeFirebaseFirestore) {
-      posts = refernce;
+    if (reference is CollectionReference ||
+        reference is FakeFirebaseFirestore) {
+      posts = reference;
     } else {
       throw "Invalid Collection reference";
     }
