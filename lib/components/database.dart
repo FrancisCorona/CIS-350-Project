@@ -60,8 +60,8 @@ class DataBase {
     final post = await posts.add(data);
 
     // Fetch the tag and update the post in the database with the generated tag
-    // final tag = await query(message);
-    // post.update({'tag': tag});
+    final tag = await query(message);
+    post.update({'tag': tag});
 
     return post;
   }
