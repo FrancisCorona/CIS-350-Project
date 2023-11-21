@@ -26,7 +26,7 @@ With the rise in popularity of social media applications in the past decade, peo
 ## 4 User Guide/Implementation
 ### Client Side:
 #### 4.1 Installation
-The user must install the “LakerVent” application on Android or IOS. After installation, the app icon will feature on the Home Screen of the user’s device.
+The user must install the “LakerVent” application on Android or iOS. After installation, the app icon will feature on the Home Screen of the user’s device.
 
 <p align="center"><img width="300" alt="iOSHomeScreen" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/a0f916c2-c4a1-41fd-a87c-35272dbe140a">
 
