@@ -28,40 +28,36 @@ With the rise in popularity of social media applications in the past decade, peo
 #### 4.1 Installation
 The user must install the “LakerVent” application on Android or IOS. After installation, the app icon will feature on the Home Screen of the user’s device.
 
-<img width="306" alt="Screenshot 2023-11-16 at 6 50 16 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/51c1588f-2b4d-4cfb-9514-ddf318ad88f6">
-
+<p align="center"><img width="300" alt="iOSHomeScreen" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/a0f916c2-c4a1-41fd-a87c-35272dbe140a">
 
 #### 4.2 Home
 The user can create a new post, comment, view, like, dislike, and report posts from this window. The user can also search and filter posts.
 
-<img width="290" alt="Screenshot 2023-11-16 at 6 51 10 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/9c500730-7acc-4e36-bc1d-7d7f3f308879">
-
+<p align="center"><img width="300" alt="HomePage" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/7ccca519-dca0-4c4c-b743-7e070d34e606">
 
 #### 4.3 Create a Post
 Users can write their posts and create them by clicking the post button. A tag will be assigned based on the content of the post.
 
-<img width="287" alt="Screenshot 2023-11-16 at 6 53 16 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/61e975ce-0e17-4600-8443-eea0f21ca666">
+<p align="center"><img width="300" alt="PostPage" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/7a4244e1-e15e-4c6f-b5fd-df5f50788066">
 
 #### 4.4 Comment on Post
 The user can comment on other users' posts and click enter to submit a comment.
 
-<img width="290" alt="Screenshot 2023-11-16 at 6 55 08 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/94989524-e7f4-4669-9393-9befdf9a5577">
+<p align="center"><img width="300" alt="CommentPage" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/eb3f690f-762a-4ee6-9823-606eab6e1d33">
 
 #### 4.5 Search
 Users can search based on content in the posts or the tag.
 
-<img width="289" alt="Screenshot 2023-11-16 at 6 53 46 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/4218a0ce-e0e2-4809-9fa5-1fbf2440cae3">
-
+<p align="center"><img width="300" alt="SearchBox" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/8f065176-593c-4f91-80d1-6bc7db55a8c8">
 
 #### 4.6 Filter
 Users can filter posts based on Recent, Oldest, and Most liked.
 
-<img width="289" alt="Screenshot 2023-11-16 at 6 54 32 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/3e395de8-a83e-46d2-a31e-be8e4be2da24">
-
+<p align="center"><img width="300" alt="FilterBox" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/2cb87e8d-6cfd-464b-a049-650af7269169">
 
 ### Server Side:
 #### 4.7 Server
-Firebase is used as the server for the application. When a new post is created, it is stored in the server along with the tag, time stamp, how many times the post has been reported, and how many likes the post has. The like counter increments based on likes and dislikes. The administrator manually controls whether or not to remove a reported post.
+Firebase is used as the server for the application. When a new post is created, it is stored in the server along with the tag, time stamp, how many times the post has been reported, and how many likes the post has. The like counter increments are based on likes and dislikes. The administrator manually controls whether or not to remove a reported post.
 
 <img width="1138" alt="Screenshot 2023-11-16 at 2 14 04 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/05412f9a-c9f2-45de-a697-b90e8d9541ad">
 
