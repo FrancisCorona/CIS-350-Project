@@ -102,26 +102,26 @@ class DataBase {
     }
   }
 
-  void addComment(String id, String commentText) {
-    posts
+  Future<void> addComment(String id, String commentText) {
+    return posts
         .doc(id)
         .collection("Comments")
         .add({"commentText": commentText, "commentTime": Timestamp.now()});
   }
 
 //getter for the posts collection reference
-  CollectionReference getPostCollection() {
+  dynamic getPostCollection() {
     return posts;
   }
 
 //provides a way to change the collection reference for testing
-  void changeCollectionReference(reference) {
+  Future<void> changeCollectionReference(reference) async {
     //checks to make sure the refernce is either a CollectionReference of is a reference for testing
     if (reference is CollectionReference ||
         reference is FakeFirebaseFirestore) {
       posts = reference;
     } else {
-      throw "Invalid Collection reference";
+      throw Exception("Invalid Collection reference");
     }
   }
 }
