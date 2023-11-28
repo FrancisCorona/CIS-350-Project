@@ -50,6 +50,7 @@ class DataBase {
   //create post
   Future<DocumentReference<Map<String, dynamic>>> createPost(
       String message) async {
+    final AIData = AI();
     final data = {
       "likes": 0,
       "message": message,
@@ -60,8 +61,8 @@ class DataBase {
     final post = await posts.add(data);
 
     // Fetch the tag and update the post in the database with the generated tag
-    //  final tag = await query(message);
-    //post.update({'tag': tag});
+    final tag = await AIData.query(message);
+    post.update({'tag': tag});
 
     return post;
   }
