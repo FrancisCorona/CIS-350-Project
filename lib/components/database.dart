@@ -60,10 +60,14 @@ class DataBase {
     };
     final post = await posts.add(data);
 
-    // Fetch the tag and update the post in the database with the generated tag
-    final tag = await AIData.query(message);
-    post.update({'tag': tag});
-
+    //incase something goes wrong with the AI, catch the error and give the post a blank tag
+    try {
+      // Fetch the tag and update the post in the database with the generated tag
+      final tag = await AIData.query(message);
+      post.update({'tag': tag});
+    } catch (exeption) {
+      post.update({'tag': ''});
+    }
     return post;
   }
 

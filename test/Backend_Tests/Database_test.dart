@@ -5,8 +5,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:lakervent/components/database.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:lakervent/components/getAIData.dart';
+
+//creates a mock class for the AI because the AI doesn't work while testing
+class MockAI extends Mock implements AI {
+  @override
+  Future<String> query(String postMessage) async {
+    var output = Future.value(postMessage);
+    return output;
+  }
+}
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -57,14 +67,13 @@ void main() async {
   test('Test getComments function', () async {
     //run the function were testing
     final comments = server.getComments('commentPost');
-    print(fakeDatabase.dump());
     List<DocumentSnapshot> snapshots = [];
     // Changes that data from a stream<QuerySnapshot> to List<DocumentSnapshot> and puts the data into snapshots
     await for (QuerySnapshot<Object?> querySnapshot in comments) {
       snapshots.addAll(querySnapshot.docs);
       break;
     }
-    print(snapshots[0]);
+
     bool isSorted = true;
     //if emtpy then something must've gone wrong
     if (snapshots.isEmpty) {
@@ -101,7 +110,6 @@ void main() async {
     await server.addComment(testID, testComment);
     //get the comments from the post
     final comment = server.getComments(testID);
-    print(fakeDatabase.dump());
     List<DocumentSnapshot> snapshotList = [];
     // Changes that data from a stream<QuerySnapshot> to List<DocumentSnapshot> and puts the data into snapshots
     await for (QuerySnapshot<Object?> querySnapshot in comment) {
@@ -110,10 +118,16 @@ void main() async {
     }
     expect(snapshotList[0]['commentText'], testComment);
   });
+
   test("Test createPost method", () async {
     //when the function asks the ai for data give it test instead of running it
-    //when(query('message')).thenAnswer((_) async => 'Stub');
-    //fetch data
+    MockAI mockAI = MockAI();
+    AI ai = AI();
+    String postMessage = 'Hello, MockAI!';
+
+    // Act
+    // when(mockAI.query(postMessage))
+    // .thenAnswer((_) async => Future.value(postMessage));
 
     //run the function were testing
     final postReference = await server.createPost("message");
@@ -138,7 +152,7 @@ void main() async {
 
     expect(snapshot['likes'], 2);
   });
-  test("test add like with invalid ID", () async {
+  test("test addLike with invalid ID", () async {
     expect(server.addLike('1234'), throwsException);
   });
   test("Test remove Like", () async {
@@ -205,8 +219,11 @@ void main() async {
     expect(server.getPostCollection(), fakeCollection);
   });
   test("Test changeCollectionReference method", () async {
+    //create a random collection
     final testDataBase = FakeFirebaseFirestore();
+    //run the method were testing
     server.changeCollectionReference(testDataBase);
+    //get the collection from the database
     final collection = server.getPostCollection();
     expect(collection, testDataBase);
   });
