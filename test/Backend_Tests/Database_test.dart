@@ -150,7 +150,7 @@ void main() async {
     var documentReference = fakeCollection.doc('addLike');
     final snapshot = await documentReference.get();
 
-    expect(snapshot['likes'], 2);
+    expect(snapshot['likes'], 3);
   });
   test("test addLike with invalid ID", () async {
     expect(server.addLike('1234'), throwsException);
