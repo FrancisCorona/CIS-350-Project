@@ -1,0 +1,21 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  flutter_test:
+    name: Run backend tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses : actions/checkout@v3
+      - uses : actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: "17"
+      - uses : subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test\Backend_Tests
