@@ -133,7 +133,7 @@ void main() async {
     final postReference = await server.createPost("message");
     //convert the post reference to a snapshot
     final snapshot = await postReference.get();
-    expect(snapshot['message'], "message");
+    expect(snapshot['message'], "messae");
   });
   test("Test add Like", () async {
     //create a post with a certain amount of likes
@@ -150,7 +150,7 @@ void main() async {
     var documentReference = fakeCollection.doc('addLike');
     final snapshot = await documentReference.get();
 
-    expect(snapshot['likes'], 2);
+    expect(snapshot['likes'], 3);
   });
   test("test addLike with invalid ID", () async {
     expect(server.addLike('1234'), throwsException);

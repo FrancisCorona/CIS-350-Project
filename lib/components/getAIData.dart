@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
-//import 'package:lakervent/api_key.dart';
 import 'package:http/http.dart' as http;
 //replace with actual api Key
 import 'package:lakervent/MockApi_key.dart';
+//import 'package:lakervent/api_key.dart';
 
 class AI {
   Future<String> query(String postMessage) async {
     var apiKey = googleApiKey;
-
+    if (apiKey == "MOCKKEY") {
+      return "test";
+    }
     final url = Uri.parse(
         'https://generativelanguage.googleapis.com/v1beta2/models/chat-bison-001:generateMessage?key=$apiKey');
     final headers = {'Content-Type': 'application/json'};
