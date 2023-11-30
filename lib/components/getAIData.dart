@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:lakervent/api_key.dart';
+//import 'package:lakervent/api_key.dart';
 import 'package:http/http.dart' as http;
+//replace with actual api Key
+import 'package:lakervent/MockApi_key.dart';
 
 class AI {
   Future<String> query(String postMessage) async {
