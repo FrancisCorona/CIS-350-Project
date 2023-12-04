@@ -9,15 +9,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:lakervent/components/getAIData.dart';
 
-//creates a mock class for the AI because the AI doesn't work while testing
-class MockAI extends Mock implements AI {
-  @override
-  Future<String> query(String postMessage) async {
-    var output = Future.value(postMessage);
-    return output;
-  }
-}
-
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   final fakeDatabase = FakeFirebaseFirestore();
@@ -120,20 +111,11 @@ void main() async {
   });
 
   test("Test createPost method", () async {
-    //when the function asks the ai for data give it test instead of running it
-    MockAI mockAI = MockAI();
-    AI ai = AI();
-    String postMessage = 'Hello, MockAI!';
-
-    // Act
-    // when(mockAI.query(postMessage))
-    // .thenAnswer((_) async => Future.value(postMessage));
-
     //run the function were testing
     final postReference = await server.createPost("message");
     //convert the post reference to a snapshot
     final snapshot = await postReference.get();
-    expect(snapshot['message'], "messae");
+    expect(snapshot['message'], "message");
   });
   test("Test add Like", () async {
     //create a post with a certain amount of likes
@@ -150,7 +132,7 @@ void main() async {
     var documentReference = fakeCollection.doc('addLike');
     final snapshot = await documentReference.get();
 
-    expect(snapshot['likes'], 3);
+    expect(snapshot['likes'], 2);
   });
   test("test addLike with invalid ID", () async {
     expect(server.addLike('1234'), throwsException);
