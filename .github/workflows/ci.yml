@@ -17,5 +17,4 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      - run: flutter test\Backend_Tests\Database_test.dart
-      - run: flutter test\Backend_Tests\CreatePost_test.dart
+      - run: flutter test
