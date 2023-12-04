@@ -5,9 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:lakervent/components/database.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:lakervent/components/getAIData.dart';
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
