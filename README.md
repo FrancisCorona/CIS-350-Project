@@ -14,14 +14,16 @@ Grand Vally State University students do not have a place to express their thoug
 With the rise in popularity of social media applications in the past decade, people have started to worry about what they post online and how their digital footprint may affect their future. Additionally, cyberbullying has become a significant problem with social media. Due to this, we introduce a new form of social media for anonymous posting so you can openly share your thoughts and opinions without any worries. The application will still have community guidelines that users need to follow, along with a reporting system to ensure a safe environment for everyone. LakerVent will provide a community for GVSU students to openly share their thoughts, easily find interesting posts through the AI topic modeling tagging system, and bring everyone closer together. The user just needs an Android or iOS device to join the LakeVent community.
 
 ## 3 Architectural Design
-![LakerVent Architecture Diagram](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/071e8db4-3465-49ad-8234-505646bb3874)
+![LakerVent Architecture Diagram UPDATED](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/63f33ca1-6556-48e2-819c-d4709549a111)
 
 ## 3.1 Use Case Diagram
-![LakerVent UML](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/73b81003-8046-40e4-a9ba-c31b21e9f788)
+![LakerVent UML UPDATED](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/bd1d5ed2-4c0f-4de8-8517-83c77bbf857d)
+
 ## 3.2 Class Diagram
 ![LakerVent Class Diagram](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/b748fb77-79d5-493b-a4fd-694573b73e5d)
+
 ## 3.3 Sequence Diagram
-![LakerVent Sequence Diagram](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/fa8fcbfb-66e5-43c4-ae6d-adca81fe9537)
+![LakerVent Sequence Diagram UPDATED](https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/b4623c62-cd4a-48f2-b10a-b8a56f22b5aa)
 
 ## 4 User Guide/Implementation
 ### Client Side:
