@@ -63,4 +63,20 @@ Firebase is used as the server for the application. When a new post is created, 
 
 <img width="1142" alt="Screenshot 2023-11-16 at 2 13 43 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/f809ffc4-0f5a-4a3a-94b3-ca80583180e1">
 
+## Risk Analysis and Retrospective
+### 1. Risk: Abuse and Harassment:
+Due to anonymity users may feel less accountable for their actions and it could lead to abusive behavior
+- **Likelihood:** High
+- **Impact:** Moderate to High
+### 2. Risk: Fake News and Misinformation:
+Users make spread misinformation in order to cause controversy and drama
+- **Likeligood:** Moderate
+- **Impact:** Moderate
+### Mitigation Strategies:
+#### What was done:
+We created a report button for every post so that users could report a post if they felt it should be removed. Posts with high report counts could then be reviewed and a dececion could be made whether to keep the post or remove it.
+#### How it could have been done better:
+- Multiple options could have been provided when reporting so the user could specify why they feel the post should be removed
+- Implement an AI to automatically monitor every post created
+- Add a report option on comments
 ## 5 Conclusion
