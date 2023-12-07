@@ -80,3 +80,4 @@ We created a report button for every post so that users could report a post if t
 - Implement an AI to automatically monitor every post created
 - Add a report option on comments
 ## 5 Conclusion
+LakerVent is an essential platform for fostering anonymous communication among Grand Valley State University students, offering refuge from the constraints of mainstream social media. LakerVent is not just an application; it is a dynamic and evolving contribution to the GVSU community, and we look forward to its ongoing success.
