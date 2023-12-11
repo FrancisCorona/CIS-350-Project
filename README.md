@@ -20,7 +20,7 @@ With the rise in popularity of social media applications in the past decade, peo
 <p align="center"><img width="600" alt="Use Case Diagram" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/bd1d5ed2-4c0f-4de8-8517-83c77bbf857d">
 
 ## 3.2 Class Diagram
-<p align="center"><img width="800" alt="Class Diagram" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/b748fb77-79d5-493b-a4fd-694573b73e5d">
+<p align="center"><img width="800" alt="Class Diagram" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/2cc1146e-4126-44f9-9aba-347a1eca8861">
 
 ## 3.3 Sequence Diagram
 <p align="center"><img width="700" alt="Sequence Diagram" src="https://github.com/FrancisCorona/CIS-350-Project/assets/19364963/b4623c62-cd4a-48f2-b10a-b8a56f22b5aa">
@@ -66,7 +66,7 @@ Firebase is used as the server for the application. When a new post is created, 
 <img width="1142" alt="Screenshot 2023-11-16 at 2 13 43 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/f809ffc4-0f5a-4a3a-94b3-ca80583180e1">
 
 #### 4.8 AI Topic Modeling
-We utilized Google's PaLM 2 Large language model for feature extraction to automatically tag a post based on this content so users can easily find interesting posts. We chose PaLM 2 because of it's easy to use API, it's power, and there are no associated costs.
+We utilized Google's PaLM 2 large language model for feature extraction to automatically tag a post based on this content so users can easily find interesting posts. We chose PaLM 2 because of it's easy to use API, it's power, and there are no associated costs.
 
 ## 5 Risk Analysis and Retrospective
 ### 1. Risk: Abuse and Harassment:
