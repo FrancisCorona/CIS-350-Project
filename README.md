@@ -65,7 +65,10 @@ Firebase is used as the server for the application. When a new post is created, 
 
 <img width="1142" alt="Screenshot 2023-11-16 at 2 13 43 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/f809ffc4-0f5a-4a3a-94b3-ca80583180e1">
 
-## Risk Analysis and Retrospective
+#### 4.8 AI Topic Modeling
+We utilized Google's PaLM 2 Large language model for feature extraction to automatically tag a post based on this content so users can easily find interesting posts. We chose PaLM 2 because of it's easy to use API, it's powerful, and there are no associated costs.
+
+## 5 Risk Analysis and Retrospective
 ### 1. Risk: Abuse and Harassment:
 Due to anonymity users may feel less accountable for their actions and it could lead to abusive behavior
 - **Likelihood:** High
@@ -81,5 +84,5 @@ We created a report button for every post so that users could report a post if t
 - Multiple options could have been provided when reporting so the user could specify why they feel the post should be removed
 - Implement an AI to automatically monitor every post created
 - Add a report option on comments
-## 5 Conclusion
+## 6 Conclusion
 LakerVent is an essential platform for fostering anonymous communication among Grand Valley State University students, offering refuge from the constraints of mainstream social media. LakerVent is not just an application; it is a dynamic and evolving contribution to the GVSU community, and we look forward to its ongoing success.
