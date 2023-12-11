@@ -66,7 +66,7 @@ Firebase is used as the server for the application. When a new post is created, 
 <img width="1142" alt="Screenshot 2023-11-16 at 2 13 43 PM" src="https://github.com/FrancisCorona/CIS-350-Project/assets/117117993/f809ffc4-0f5a-4a3a-94b3-ca80583180e1">
 
 #### 4.8 AI Topic Modeling
-We utilized Google's PaLM 2 Large language model for feature extraction to automatically tag a post based on this content so users can easily find interesting posts. We chose PaLM 2 because of it's easy to use API, it's powerful, and there are no associated costs.
+We utilized Google's PaLM 2 Large language model for feature extraction to automatically tag a post based on this content so users can easily find interesting posts. We chose PaLM 2 because of it's easy to use API, it's power, and there are no associated costs.
 
 ## 5 Risk Analysis and Retrospective
 ### 1. Risk: Abuse and Harassment:
