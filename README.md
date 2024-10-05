@@ -1,5 +1,3 @@
-### Class: CIS 350
-### Section: 03
 ### LakerVent: An Anonymous Venting Application.
 ### Made by:
 ___
